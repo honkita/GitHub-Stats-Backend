@@ -4,8 +4,6 @@ const PORT = 4000;
 
 app.use(express.json()); // <==== parse request body as JSON
 
-var resultJson1;
-
 app.get("/", (req, res) => {
   res.send(`
     <svg height="500" width="200" viewBox="0 0 500 200">
