@@ -6,7 +6,7 @@ app.use(express.json()); // <==== parse request body as JSON
 
 var resultJson1;
 
-app.get("/api", async (req, res) => {
+app.get("/", async (req, res) => {
   // first call
   var result1 = await fetch("https://jsonplaceholder.typicode.com/users");
 
