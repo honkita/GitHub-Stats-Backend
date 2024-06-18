@@ -7,9 +7,6 @@ app.use(express.json()); // <==== parse request body as JSON
 var resultJson1;
 
 app.get("/", async (req, res) => {
-  // first call
-  var result1 = await fetch("https://jsonplaceholder.typicode.com/users");
-
   res.send(`
     <svg height="500" width="200" viewBox="0 0 500 200">
         <g>
