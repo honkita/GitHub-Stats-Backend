@@ -18,11 +18,18 @@ app.get("/", (req, res) => {
   res.setHeader("Content-Type", "image/svg+xml");
   var link;
   if (req.query.github != null) {
+    var colour;
+    if (req.query.colour == null) {
+      colour = "default";
+    } else {
+      colour = req.query.colour;
+    }
     link = githubParser.parseLink(
       req.query.github,
       circle.x,
       circle.y,
-      circle.r
+      circle.r,
+      colour
     );
 
     //console.log(link);

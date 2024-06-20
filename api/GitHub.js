@@ -1,6 +1,6 @@
 const colours = require("../Assets/colours.json");
 module.exports = {
-  parseLink: async function (user, x, y, r) {
+  parseLink: async function (user, x, y, r, colour) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos");
     const request = await p.json();
     const lan = {};
@@ -29,10 +29,8 @@ module.exports = {
       total = total + sortedDict[key];
     });
 
-    console.log(total);
     let sum = 0;
-
-    const c = colours["reds"];
+    const c = colours[colour in colours ? colour : "default"];
     const styles = [];
     //console.log(colours["default"]);
     if (keys != null && total !== null && sortedDict !== null) {
