@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
         <g>
           <rect width="${box.width}" height="${box.height}" x="0" y="0" rx="${box.curve}" ry="${box.curve}" 
             style="fill:transparent;stroke-width:${box.border};stroke:black" /> 
-          ${link}
+          ${link} 
         </g>
                 
         
