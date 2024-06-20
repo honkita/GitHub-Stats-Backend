@@ -32,7 +32,7 @@ module.exports = {
     console.log(total);
     let sum = 0;
 
-    const c = colours["default"];
+    const c = colours["reds"];
     const styles = [];
     //console.log(colours["default"]);
     if (keys != null && total !== null && sortedDict !== null) {
