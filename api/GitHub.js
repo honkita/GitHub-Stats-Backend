@@ -45,6 +45,9 @@ module.exports = {
                 stroke-width="${r * 2}"
                 stroke-dasharray="${p} ${circumference}"
                 transform="rotate(${sum - 90} ${x} ${y})"/>
+
+            <circle r="${r / 5}" cx="${x * 3}" cy="${y + i * 10}" fill="${c[i]}"/>
+            
             `
         );
         sum = sum + angle;
