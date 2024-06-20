@@ -32,10 +32,24 @@ app.get("/", (req, res) => {
     link = result; // "Some User token"
     //console.log(link);
     res.send(
-      `<svg xmlns="http://www.w3.org/2000/svg" height="${box.height}" width="${box.width}" viewBox="0 0 1000 1000">
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${box.width}" height="${box.height}"  viewBox="0 0 ${box.width} ${box.height}">
+       
+        <style>
+          @import url("https://fonts.googleapis.com/css2?family=Poppins");
+          .title {
+            font-family: Poppins;
+            font-weight: 400;
+            font-style: normal; 
+            fill: white;
+          }
+        </style>
         <g>
+          
           <rect width="${box.width}" height="${box.height}" x="0" y="0" rx="${box.curve}" ry="${box.curve}" 
-            style="fill:transparent;stroke-width:${box.border};stroke:black" /> 
+            style="fill:#a83b39;stroke-width:${box.border};stroke:white" /> 
+          <text x="50%" y="12.5%" font-size= "${box.width / 32}" dominant-baseline="middle" text-anchor="middle" class="title">
+            GitHub Most Common Languages</text>   
+          <circle r="${circle.r * 2}" cx="${circle.x}" cy="${circle.y}" style="fill:transparent;stroke-width:${box.border};stroke:white"/>
           ${link} 
         </g>
                 
