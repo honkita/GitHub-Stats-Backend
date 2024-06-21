@@ -12,6 +12,7 @@ app.use(express.json()); // <==== parse request body as JSON
 // userToken.then(function (result) {
 //   console.log(result); // "Some User token"
 // });
+//
 
 app.get("/", (req, res) => {
   //res.setHeader("Content-Type", "application/json");
