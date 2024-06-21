@@ -49,6 +49,7 @@ module.exports = {
             <circle r="${r / 5}" cx="${x * 3}" cy="${(y + i - (keys.length - 1) / 2) * 20}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
             <text x="${(x * 5) / 2}" y="${(y + i - (keys.length - 1) / 2) * 20}" font-size= "20" dominant-baseline="middle" text-anchor="end" class="title">
             ${keys[i]}</text> 
+            
             `
         );
         sum = sum + angle;
