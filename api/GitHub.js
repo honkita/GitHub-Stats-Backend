@@ -1,15 +1,7 @@
 const colours = require("../Assets/colours.json");
 module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
-<<<<<<< HEAD
     const p = await fetch("https://api.github.com/users/" + user + "/repos");
-=======
-    const p = await fetch("https://api.github.com/users/" + user + "/repos", {
-      headers: {
-        Authorization: "token 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",
-      },
-    });
->>>>>>> 96ef668 (Added limit of 10 languages plus one OTHER section for pie chart)
     const request = await p.json();
     const lan = {};
     var t = 0;
