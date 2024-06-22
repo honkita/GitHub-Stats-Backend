@@ -1,7 +1,11 @@
 const colours = require("../Assets/colours.json");
 module.exports = {
-  parseLink: async function (user, x, y, r, colour) {
-    const p = await fetch("https://api.github.com/users/" + user + "/repos");
+  parseLink: async function (user, x, y, r, colour, limit) {
+    const p = await fetch("https://api.github.com/users/" + user + "/repos", {
+      headers: {
+        Authorization: "token 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",
+      },
+    });
     const request = await p.json();
     const lan = {};
     var t = 0;
@@ -19,12 +23,30 @@ module.exports = {
       });
     }
 
-    const sortedDict = Object.fromEntries(
-      Object.entries(lan).sort(([, a], [, b]) => a - b)
+    var sortedDict = Object.fromEntries(
+      Object.entries(lan).sort(([, a], [, b]) => b - a)
     );
-    console.log(sortedDict);
+
     var total = 0;
     var keys = Object.keys(sortedDict);
+
+    if (keys.length > limit) {
+      var other = 0;
+      for (let i = limit; i < keys.length; i++) {
+        other = other + sortedDict[keys[i]];
+      }
+      sortedDict = Object.fromEntries(
+        Object.entries(lan)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, limit)
+      );
+      keys = Object.keys(sortedDict);
+      sortedDict["Other"] = other;
+      keys.push("Other");
+    }
+
+    console.log(sortedDict);
+
     keys.forEach(function (key) {
       total = total + sortedDict[key];
     });
@@ -36,6 +58,7 @@ module.exports = {
     if (keys != null && total !== null && sortedDict !== null) {
       for (let i = 0; i < keys.length; i++) {
         const portion = sortedDict[keys[i]] / total;
+        const percentRounded = (portion * 100).toFixed(2);
         const circumference = 2 * r * 3.14;
         const p = portion * circumference;
         const angle = portion * 360;
@@ -46,10 +69,11 @@ module.exports = {
                 stroke-dasharray="${p} ${circumference}"
                 transform="rotate(${sum - 90} ${x} ${y})"/>
 
-            <circle r="${r / 5}" cx="${x * 3}" cy="${(y + i - (keys.length - 1) / 2) * 20}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
-            <text x="${(x * 5) / 2}" y="${(y + i - (keys.length - 1) / 2) * 20}" font-size= "20" dominant-baseline="middle" text-anchor="end" class="title">
-            ${keys[i]}</text> 
-            
+            <circle r="${r / 5}" cx="${x * 2}" cy="${y - r * 2 + i * 25}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
+            <text x="${x * 2 + (r / 5) * 2}" y="${y - r * 2 + i * 25}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title">
+              ${keys[i]}: ${percentRounded} %
+            </text> 
+
             `
         );
         sum = sum + angle;
