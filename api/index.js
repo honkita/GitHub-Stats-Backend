@@ -44,7 +44,6 @@ app.get("/", (req, res) => {
 
   link.then(function (result) {
     link = result; // "Some User token"
-    //console.log(link);
     res.send(
       `<svg xmlns="http://www.w3.org/2000/svg" width="${box.width}" height="${box.height}"  viewBox="0 0 ${box.width} ${box.height}">
        
