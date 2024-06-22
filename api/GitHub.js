@@ -1,11 +1,7 @@
 const colours = require("../Assets/colours.json");
 module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
-    const p = await fetch("https://api.github.com/users/" + user + "/repos", {
-      headers: {
-        Authorization: "token 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",
-      },
-    });
+    const p = await fetch("https://api.github.com/users/" + user + "/repos");
     const request = await p.json();
     const lan = {};
     var t = 0;
