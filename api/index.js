@@ -48,9 +48,9 @@ app.get("/", (req, res) => {
       `<svg xmlns="http://www.w3.org/2000/svg" width="${box.width}" height="${box.height}"  viewBox="0 0 ${box.width} ${box.height}">
        
         <style>
-          @import url("https://fonts.googleapis.com/css2?family=Poppins");
+          @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
           .title {
-            font-family: Poppins;
+            font-family: "Poppins", sans-serif;
             font-weight: 400;
             font-style: normal; 
             fill: white;
