@@ -47,15 +47,19 @@ app.get("/", (req, res) => {
     link = result; // "Some User token"
     res.send(
       `<svg xmlns="http://www.w3.org/2000/svg" width="${box.width}" height="${box.height}"  viewBox="0 0 ${box.width} ${box.height}">
-        <style>
-          @import url("https://fonts.googleapis.com/css2?family=Poppins");
-          .title {
-            font-family: "Poppins", sans-serif;
-            font-weight: 400;
-            font-style: normal; 
-            fill: white;
-          }
-        </style>
+      <defs>  
+        <style type="text/css">
+            .title {
+              font-weight: 400;
+              font-family: 'Playwrite ES Deco';
+              src: url("https://fonts.googleapis.com/css2?family=Playwrite+ES+Deco");
+              font-style: normal; 
+              fill: white;
+            }
+          </style>
+        </defs>
+
+
         <g>
           <rect width="${box.width}" height="${box.height}" x="0" y="0" rx="${box.curve}" ry="${box.curve}" 
             style="fill:#a83b39;stroke-width:${box.border};stroke:white" /> 
@@ -68,7 +72,7 @@ app.get("/", (req, res) => {
           
           <text x="${box.border * 2 + 96}" y="${box.border * 2 + 32}" font-size= "${box.width / 16}" dominant-baseline="middle" text-anchor="left" class="title">
             ${req.query.github}</text>   
-          <circle r="${circle.r * 2}" cx="${circle.x}" cy="${circle.y}" style="fill:transparent;stroke-width:${box.border};stroke:white"/>
+          <circle r="${circle.r * 2}" cx="${circle.x}" cy="${circle.y}" style="fill:transparent;stroke-width:${box.border};stroke:white" font-family="Roboto"/>
           ${link} 
         </g>
                 
