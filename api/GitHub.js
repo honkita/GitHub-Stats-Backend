@@ -1,11 +1,14 @@
 require("dotenv").config();
+const core = require("@actions/core");
 
 const colours = require("../Assets/colours.json");
 
 module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos", {
-      headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` },
+      headers: {
+        Authorization: `Bearer ${core.getInput("GHTOKEN") || process.env.GHTOKEN}`,
+      },
     });
     const request = await p.json();
     const lan = {};
@@ -28,7 +31,7 @@ module.exports = {
     const commitsFetch = await fetch(
       "https://api.github.com/search/commits?q=author:" + user,
       {
-        headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` },
+        headers: { Authorization: `Bearer ${process.env.GHTOKEN}` },
       }
     );
 
