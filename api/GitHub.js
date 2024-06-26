@@ -3,7 +3,7 @@ module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos");
     const request = await p.json();
-    console.log(request);
+    //console.log(request);
 
     //https://api.github.com/repos/honkita/UtaRhythmGame/commits
 
@@ -14,11 +14,6 @@ module.exports = {
       //console.log(this.posts[i]["name"]);
       const pp = await fetch(request[i]["languages_url"]);
       const ppp = await pp.json();
-      const commitsFetch = await fetch(
-        "https://api.github.com/repos/" + request[i]["full_name"] + "/commits"
-      );
-      const commitsFetchJSON = await commitsFetch.json();
-      console.log(commitsFetchJSON.length);
 
       Object.keys(ppp).forEach(function (key) {
         if (!(key in Object.keys(lan))) {
@@ -28,6 +23,13 @@ module.exports = {
         }
       });
     }
+
+    const commitsFetch = await fetch(
+      "https://api.github.com/search/commits?q=author:" + user
+    );
+
+    const commitsFetchJSON = await commitsFetch.json();
+    const totalCommits = await commitsFetchJSON["total_count"];
 
     var sortedDict = Object.fromEntries(
       Object.entries(lan).sort(([, a], [, b]) => b - a)
@@ -75,8 +77,8 @@ module.exports = {
                 stroke-dasharray="${p} ${circumference}"
                 transform="rotate(${sum - 90} ${x} ${y})"/>
 
-            <circle r="${r / 5}" cx="${x * 2}" cy="${y - (keys.length / 2 - i) * 25}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
-            <text x="${x * 2 + (r / 5) * 2}" y="${y - (keys.length / 2 - i) * 25}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title">
+            <circle r="${r / 5}" cx="${x * 2}" cy="${y - (keys.length / 2 - i - 1 / 2) * 25}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
+            <text x="${x * 2 + (r / 5) * 2}" y="${y - (keys.length / 2 - i - 1 / 2) * 25}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title">
               ${keys[i]}: ${percentRounded} %
             </text> 
 
@@ -84,6 +86,14 @@ module.exports = {
         );
         sum = sum + angle;
       }
+      styles.push(
+        `
+        <text x="${x * 4}" y="${y}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title"> 
+          Commits: ${totalCommits}
+        </text>
+        `
+      );
+
       return styles.join("\r\n");
     }
   },

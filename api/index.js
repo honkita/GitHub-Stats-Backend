@@ -39,8 +39,6 @@ app.get("/", (req, res) => {
       colour,
       limit
     );
-
-    //console.log(link);
   }
 
   link.then(function (result) {
