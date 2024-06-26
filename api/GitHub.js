@@ -3,10 +3,6 @@ module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos");
     const request = await p.json();
-    //console.log(request);
-
-    //https://api.github.com/repos/honkita/UtaRhythmGame/commits
-
     const lan = {};
     const commitsTotal = 0;
     var t = 0;
