@@ -7,7 +7,7 @@ module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos", {
       headers: {
-        Authorization: `Bearer ${core.getInput("GHTOKEN")}`,
+        Authorization: `Bearer ${getInput("GHTOKEN") || process.env.GHTOKEN}`,
       },
     });
     const request = await p.json();
@@ -31,7 +31,9 @@ module.exports = {
     const commitsFetch = await fetch(
       "https://api.github.com/search/commits?q=author:" + user,
       {
-        headers: { Authorization: `Bearer ${process.env.GHTOKEN}` },
+        headers: {
+          Authorization: `Bearer ${getInput("GHTOKEN") || process.env.GHTOKEN}`,
+        },
       }
     );
 
