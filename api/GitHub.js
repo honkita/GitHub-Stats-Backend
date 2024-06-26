@@ -7,7 +7,7 @@ module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos", {
       headers: {
-        Authorization: `Bearer ${process.env.GHTOKEN}`,
+        Authorization: `bearer ${process.env.GHTOKEN}`,
       },
     });
     const request = await p.json();
@@ -16,7 +16,11 @@ module.exports = {
     var t = 0;
     for (let i = 0; i < request.length; i++) {
       //console.log(this.posts[i]["name"]);
-      const pp = await fetch(request[i]["languages_url"]);
+      const pp = await fetch(request[i]["languages_url"], {
+        headers: {
+          Authorization: `bearer ${process.env.GHTOKEN}`,
+        },
+      });
       const ppp = await pp.json();
 
       Object.keys(ppp).forEach(function (key) {
@@ -32,7 +36,7 @@ module.exports = {
       "https://api.github.com/search/commits?q=author:" + user,
       {
         headers: {
-          Authorization: `Bearer ${process.env.GHTOKEN}`,
+          Authorization: `bearer ${process.env.GHTOKEN}`,
         },
       }
     );
