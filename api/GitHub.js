@@ -7,7 +7,7 @@ module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     const p = await fetch("https://api.github.com/users/" + user + "/repos", {
       headers: {
-        Authorization: `Bearer ${core.getInput("GHTOKEN") || process.env.GHTOKEN}`,
+        Authorization: `Bearer ${core.getInput("GHTOKEN")}`,
       },
     });
     const request = await p.json();
