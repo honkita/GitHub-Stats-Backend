@@ -153,7 +153,7 @@ module.exports = {
       0
     );
 
-    const c = colours[colour in colours ? colour : "default"];
+    const c = colours[colour in colours ? colour : "default"]["colours"];
 
     //generate the graphs
     const linesGraph = generateGraph(
