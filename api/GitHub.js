@@ -134,7 +134,7 @@ module.exports = {
     const weightedGraph = [];
 
     //console.log(colours["default"]);
-    if (keys != null && lineTotal !== null && sortedDict !== null) {
+    if (sortedDict !== null) {
       const cx = r * 3;
       const cy = r * 4;
       for (let i = 0; i < keys.length; i++) {
@@ -168,7 +168,7 @@ module.exports = {
       );
     }
 
-    if (keys != null && lineTotal !== null && sortedWeightedDict !== null) {
+    if (sortedWeightedDict !== null) {
       const cx = r * 9;
       const cy = r * 4;
       for (let i = 0; i < weightedkeys.length; i++) {
