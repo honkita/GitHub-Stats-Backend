@@ -72,6 +72,8 @@ app.get("/", (req, res) => {
           <circle r="${circle.r * 2}" cx="${circle.r * 9}" cy="${circle.r * 4}" style="fill:transparent;stroke-width:${box.border};stroke:white"/>
           <rect x="${circle.r * 12 - line.width / 2}" y = "${circle.r * 2}" width="${line.width}" height="${box.height - circle.r * 3}" rx="${line.width / 2}" ry="${line.width / 2}" fill="white"/>
           ${link} 
+          <circle r="${circle.r}" cx="${circle.r * 3}" cy="${circle.r * 4}" style="fill:#a83b39;stroke-width:${box.border / 2};stroke:white"/>
+          <circle r="${circle.r}" cx="${circle.r * 9}" cy="${circle.r * 4}" style="fill:#a83b39;stroke-width:${box.border / 2};stroke:white"/>
         </g>
                 
         
