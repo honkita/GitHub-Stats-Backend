@@ -95,6 +95,8 @@ module.exports = {
     var starred = 0;
     var pullRequests = 0;
     var issues = 0;
+    var watchers = 0;
+    var forks = 0;
 
     for (let i = 0; i < numRepos; i++) {
       const repoInfoFetch = await fetch(
@@ -103,24 +105,22 @@ module.exports = {
       );
       const repoInfoJSON = await repoInfoFetch.json();
 
-      const [stargazersList, pullRequestsList, issuesFetchList] =
-        await Promise.all([
-          fetch(reposJSON[i]["stargazers_url"], headerValues).then((resp) =>
-            resp.json()
-          ),
-          fetch(
-            reposJSON[i]["pulls_url"].replace("{/number}", ""),
-            headerValues
-          ).then((resp) => resp.json()),
-          fetch(
-            reposJSON[i]["issues_url"].replace("{/number}", ""),
-            headerValues
-          ).then((resp) => resp.json()),
-        ]);
+      const [pullRequestsList, issuesFetchList] = await Promise.all([
+        fetch(
+          reposJSON[i]["pulls_url"].replace("{/number}", ""),
+          headerValues
+        ).then((resp) => resp.json()),
+        fetch(
+          reposJSON[i]["issues_url"].replace("{/number}", ""),
+          headerValues
+        ).then((resp) => resp.json()),
+      ]);
 
-      starred = starred + stargazersList.length;
+      starred = starred + reposJSON[i]["stargazers_count"];
       pullRequests = pullRequests + pullRequestsList.length;
       issues = issues + issuesFetchList.length;
+      watchers = watchers + reposJSON[i]["watchers_count"];
+      forks = forks + reposJSON[i]["forks_count"];
 
       const sumValues = Object.values(repoInfoJSON).reduce((a, b) => a + b, 0); // sum of all the lines of code in a given repo
 
@@ -243,6 +243,33 @@ module.exports = {
 
       <text x="${x - r}" y="${r * 7}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
         ${issues}
+      </text>
+
+      <g transform="translate(${(r / 2) * 25}, ${r * 8 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M15.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+            fill="white">
+          </path>
+          <path d="M12 3.5c3.432 0 6.124 1.534 8.054 3.241 1.926 1.703 3.132 3.61 3.616 4.46a1.6 1.6 0 0 1 0 1.598c-.484.85-1.69 2.757-3.616 4.461-1.929 1.706-4.622 3.24-8.054 3.24-3.432 0-6.124-1.534-8.054-3.24C2.02 15.558.814 13.65.33 12.8a1.6 1.6 0 0 1 0-1.598c.484-.85 1.69-2.757 3.616-4.462C5.875 5.034 8.568 3.5 12 3.5ZM1.633 11.945a.115.115 0 0 0-.017.055c.001.02.006.039.017.056.441.774 1.551 2.527 3.307 4.08C6.691 17.685 9.045 19 12 19c2.955 0 5.31-1.315 7.06-2.864 1.756-1.553 2.866-3.306 3.307-4.08a.111.111 0 0 0 .017-.056.111.111 0 0 0-.017-.056c-.441-.773-1.551-2.527-3.307-4.08C17.309 6.315 14.955 5 12 5 9.045 5 6.69 6.314 4.94 7.865c-1.756 1.552-2.866 3.306-3.307 4.08Z"
+            fill="white">
+          </path>
+        </svg>
+      </g>
+
+      <text x="${x - r}" y="${r * 8}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
+        ${watchers}
+      </text>
+
+      <g transform="translate(${(r / 2) * 25}, ${r * 9 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+          <path d="M9.5 3.25a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.493 2.493 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25Zm-6 0a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Zm8.25-.75a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5ZM4.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"
+            fill="white">
+          </path>
+        </svg>
+      </g>
+
+      <text x="${x - r}" y="${r * 9}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
+        ${forks}
       </text>
 
       `;

@@ -9,13 +9,13 @@
 
 ## Display Information
 
-<img src="./ReadMeImages/git-hub-stats-backend.vercel.app.svg"/>
+[![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=default)](https://github.com/honkita/GitHub-Stats-Backend)
 
-| Item          | Description                                                                                                                                                                                          |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lines         | Displays graphically the number of lines coded with a given language and displays the user's top languages.                                                                                          |
-| Repos         | Displays graphically the percentage of repos coded with a given language and displays the user's top languages.                                                                                      |
-| Miscellaneous | Displays the following information from top to bottom: <ul><li>Number of Repos</li><li>Number of Commits</li><li>Number of Stars</li><li>Number of Fetch Requests</li><li>Number of Issues</li></ul> |
+| Item          | Description                                                                                                                                                                                                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Lines         | Displays graphically the number of lines coded with a given language and displays the user's top languages.                                                                                                                                                                                |
+| Repos         | Displays graphically the percentage of repos coded with a given language and displays the user's top languages.                                                                                                                                                                            |
+| Miscellaneous | Displays the following information from top to bottom: <ul><li>Number of Repos</li><li>Total number of commits</li><li>Total number of atars</li><li>Total number of fetch requests</li><li>Total number of issues</li><li>Total number of viewers</li><li>Total number of forks</li></ul> |
 
 ## How to use
 
