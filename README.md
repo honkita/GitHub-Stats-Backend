@@ -5,7 +5,7 @@
 ![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg)
 
 > [!IMPORTANT]
-> Because of GitHub's rate limit, it is advised to fork this project and deploy on Vercel or a similar platform. Along with this, generating a personal access token is mandatory because without one, the max number of requests per hour is 50. While there is caching for users that refreshes every 1-5 minutes, it is still recommended.
+> Because of GitHub's rate limit, it is advised to fork this project and deploy on Vercel or a similar platform. Along with this, generating a personal access token is mandatory because without one, the max number of requests per hour is 50 and private repositories CAN NOT be accessed. While there is caching for users that refreshes every 1-5 minutes, it is still recommended.
 
 ## Display Information
 
@@ -19,6 +19,8 @@
 
 ## How to use
 
+### Basic
+
 Replace **GITHUB_USERNAME** with your username on GitHub.
 
 ```
@@ -26,3 +28,9 @@ Replace **GITHUB_USERNAME** with your username on GitHub.
 ```
 
 That's it!
+
+### Additional parameters
+
+| Parameter | Type    | Description                                                                                                                                                                   |
+| --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| limit     | Integer | Denotes the **max** number of unique languages that can be displayed. The default/absolute max value is 5. If there are more languages, they will be grouped under **Other**. |

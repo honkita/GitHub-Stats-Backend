@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
   if (req.query.github != null) {
     if (req.query.colour == null) {
       colour = "default";
+      cache.put("colour", "default", 60000);
     } else {
       colour = req.query.colour;
     }
@@ -28,7 +29,13 @@ app.get("/", (req, res) => {
     } else {
       limit = req.query.limit;
     }
-    if (cache.get("link") == null) {
+    if (
+      cache.get("link") == null ||
+      cache.get("colour") != colour ||
+      cache.get("limit" != limit)
+    ) {
+      cache.put("colour", colour, 60000);
+      cache.put("limit", limit, 60000);
       cache.put(
         "link",
         githubParser.parseLink(
