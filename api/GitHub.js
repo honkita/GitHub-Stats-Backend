@@ -156,8 +156,8 @@ module.exports = {
     var sortedWeightedDict = getTopValues(weightedLanguages, limit);
     var keys = Object.keys(sortedDict);
     var weightedkeys = Object.keys(sortedWeightedDict);
-    console.log(sortedWeightedDict);
-    console.log(weightedkeys);
+    // console.log(sortedWeightedDict);
+    // console.log(weightedkeys);
 
     var lineTotal = Object.values(sortedDict).reduce((a, b) => a + b, 0);
     // reposCodeTotal /= numRepos SINCE repos can have no code
