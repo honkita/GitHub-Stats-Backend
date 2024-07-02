@@ -28,15 +28,22 @@ app.get("/", (req, res) => {
     } else {
       limit = req.query.limit;
     }
+    if (cache.get("link") == null) {
+      cache.put(
+        "link",
+        githubParser.parseLink(
+          req.query.github,
+          box.width,
+          box.height,
+          circle.r,
+          colour,
+          limit
+        ),
+        60000
+      );
+    }
 
-    link = githubParser.parseLink(
-      req.query.github,
-      box.width,
-      box.height,
-      circle.r,
-      colour,
-      limit
-    );
+    link = cache.get("link");
   }
 
   link.then(function (result) {
@@ -44,8 +51,7 @@ app.get("/", (req, res) => {
     const background =
       colours[colour in colours ? colour : "default"]["background"];
 
-    cache.put(
-      "user",
+    res.send(
       `<svg xmlns="http://www.w3.org/2000/svg" width="${box.width}" height="${box.height}"  viewBox="0 0 ${box.width} ${box.height}">
       <defs>  
         <style type="text/css">
@@ -78,10 +84,8 @@ app.get("/", (req, res) => {
         </g>
                 
         
-      </svg>`,
-      60000
+      </svg>`
     );
-    res.send(cache.get("user"));
   });
 });
 
