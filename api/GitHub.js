@@ -74,11 +74,13 @@ function generateGraph(cx, y, r, name, keys, values, total, c) {
 module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     // fetch the JSON for the GitHub user's repos and the number of commits
-    const [repos, totalCommits] = await Promise.all([
+    const [reposJSON, totalCommits] = await Promise.all([
       fetch(
         "https://api.github.com/search/repositories?q=user:" + user,
         headerValues
-      ).then((resp) => resp.json()),
+      )
+        .then((resp) => resp.json())
+        .then((resp) => resp["items"]),
       fetch(
         "https://api.github.com/search/commits?q=author:" + user,
         headerValues
@@ -87,7 +89,6 @@ module.exports = {
         .then((resp) => resp["total_count"]),
     ]);
 
-    const reposJSON = repos["items"];
     const lan = {};
     const weightedLanguages = {};
     const numRepos = reposJSON.length;
@@ -96,51 +97,47 @@ module.exports = {
     var issues = 0;
 
     for (let i = 0; i < numRepos; i++) {
-      //console.log(this.posts[i]["name"]);
-
-      const pp = await fetch(reposJSON[i]["languages_url"], headerValues);
-
-      const ppp = await pp.json();
-
-      const [stargazersFetch, pullRequestsFetch, issuesFetch] =
-        await Promise.all([
-          fetch(reposJSON[i]["stargazers_url"], headerValues),
-          fetch(
-            reposJSON[i]["pulls_url"].replace("{/number}", ""),
-            headerValues
-          ),
-          fetch(
-            reposJSON[i]["issues_url"].replace("{/number}", ""),
-            headerValues
-          ),
-        ]);
+      const repoInfoFetch = await fetch(
+        reposJSON[i]["languages_url"],
+        headerValues
+      );
+      const repoInfoJSON = await repoInfoFetch.json();
 
       const [stargazersList, pullRequestsList, issuesFetchList] =
         await Promise.all([
-          stargazersFetch.json(),
-          pullRequestsFetch.json(),
-          issuesFetch.json(),
+          fetch(reposJSON[i]["stargazers_url"], headerValues).then((resp) =>
+            resp.json()
+          ),
+          fetch(
+            reposJSON[i]["pulls_url"].replace("{/number}", ""),
+            headerValues
+          ).then((resp) => resp.json()),
+          fetch(
+            reposJSON[i]["issues_url"].replace("{/number}", ""),
+            headerValues
+          ).then((resp) => resp.json()),
         ]);
+
       starred = starred + stargazersList.length;
       pullRequests = pullRequests + pullRequestsList.length;
       issues = issues + issuesFetchList.length;
 
-      const sumValues = Object.values(ppp).reduce((a, b) => a + b, 0); // sum of all the lines of code in a given repo
+      const sumValues = Object.values(repoInfoJSON).reduce((a, b) => a + b, 0); // sum of all the lines of code in a given repo
 
-      Object.keys(ppp).forEach(function (key) {
+      Object.keys(repoInfoJSON).forEach(function (key) {
         if (!(key in Object.keys(lan))) {
-          lan[key] = ppp[key];
+          lan[key] = repoInfoJSON[key];
         } else {
-          lan[key] = lan[key] + ppp[key];
+          lan[key] = lan[key] + repoInfoJSON[key];
         }
       });
 
-      Object.keys(ppp).forEach(function (key) {
+      Object.keys(repoInfoJSON).forEach(function (key) {
         if (!(key in weightedLanguages)) {
-          weightedLanguages[key] = ppp[key] / sumValues;
+          weightedLanguages[key] = repoInfoJSON[key] / sumValues;
         } else {
           weightedLanguages[key] =
-            weightedLanguages[key] + ppp[key] / sumValues;
+            weightedLanguages[key] + repoInfoJSON[key] / sumValues;
         }
       });
     }
