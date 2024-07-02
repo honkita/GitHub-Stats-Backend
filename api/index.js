@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
     if (
       cache.get("link") == null ||
       cache.get("colour") != colour ||
-      cache.get("limit" != limit)
+      cache.get("limit") != limit
     ) {
       cache.put("colour", colour, 60000);
       cache.put("limit", limit, 60000);
