@@ -45,14 +45,32 @@ module.exports = {
     const lan = {};
     const weightedLanguages = {};
     const numRepos = reposJSON.length;
-
-    var t = 0;
+    var starred = 0;
+    var pullRequests = 0;
 
     for (let i = 0; i < numRepos; i++) {
       //console.log(this.posts[i]["name"]);
+
       const pp = await fetch(reposJSON[i]["languages_url"], headerValues);
       //console.log(reposJSON[i]["languages_url"]);
       const ppp = await pp.json();
+
+      const stargazersFetch = await fetch(
+        reposJSON[i]["stargazers_url"],
+        headerValues
+      );
+      const stargazersList = await stargazersFetch.json();
+      starred = starred + stargazersList.length;
+
+      if (reposJSON[i]["visibility"] == "public") {
+        // get pull requests ONLY IF the repo is public
+        const pullRequestsFetch = await fetch(
+          reposJSON[i]["pulls_url"].replace("{/number}", ""),
+          headerValues
+        );
+        const pullRequestsList = await pullRequestsFetch.json();
+        pullRequests = pullRequests + pullRequestsList.length;
+      }
 
       const sumValues = Object.values(ppp).reduce((a, b) => a + b, 0); // sum of all the lines of code in a given repo
 
@@ -176,18 +194,46 @@ module.exports = {
       );
     }
 
-    const scale = 1 / 20;
-
+    const scale = 3 / 2;
     var statistics = `
-      <g transform="translate(${(r / 2) * 25}, ${y / 2 - (1024 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-        <svg height="1024" width="896" xmlns="http://www.w3.org/2000/svg">
-          <path d="M694.875 448C666.375 337.781 567.125 256 448 256c-119.094 0-218.375 81.781-246.906 192H0v128h201.094C229.625 686.25 328.906 768 448 768c119.125 0 218.375-81.75 246.875-192H896V448H694.875zM448 640c-70.656 0-128-57.375-128-128 0-70.656 57.344-128 128-128 70.625 0 128 57.344 128 128C576 582.625 518.625 640 448 640z" fill="white"/>
+      <g transform="translate(${(r / 2) * 25}, ${r * 3 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M16.944 11h4.306a.75.75 0 0 1 0 1.5h-4.306a5.001 5.001 0 0 1-9.888 0H2.75a.75.75 0 0 1 0-1.5h4.306a5.001 5.001 0 0 1 9.888 0Zm-1.444.75a3.5 3.5 0 1 0-7 0 3.5 3.5 0 0 0 7 0Z" 
+          fill="white">
+        </path>
         </svg>
       </g>
       
-      <text x="${x - r}" y="${y / 2}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title"> 
+      <text x="${x - r}" y="${r * 3}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title"> 
         ${totalCommits}
       </text>
+
+      <g transform="translate(${(r / 2) * 25}, ${r * 4 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M12 .25a.75.75 0 0 1 .673.418l3.058 6.197 6.839.994a.75.75 0 0 1 .415 1.279l-4.948 4.823 1.168 6.811a.751.751 0 0 1-1.088.791L12 18.347l-6.117 3.216a.75.75 0 0 1-1.088-.79l1.168-6.812-4.948-4.823a.75.75 0 0 1 .416-1.28l6.838-.993L11.328.668A.75.75 0 0 1 12 .25Zm0 2.445L9.44 7.882a.75.75 0 0 1-.565.41l-5.725.832 4.143 4.038a.748.748 0 0 1 .215.664l-.978 5.702 5.121-2.692a.75.75 0 0 1 .698 0l5.12 2.692-.977-5.702a.748.748 0 0 1 .215-.664l4.143-4.038-5.725-.831a.75.75 0 0 1-.565-.41L12 2.694Z" fill="white">
+          </path>
+        </svg>
+      </g>
+      
+      <text x="${x - r}" y="${r * 4}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title"> 
+        ${starred}
+      </text>
+
+      <g transform="translate(${(r / 2) * 25}, ${r * 5 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M16 19.25a3.25 3.25 0 1 1 6.5 0 3.25 3.25 0 0 1-6.5 0Zm-14.5 0a3.25 3.25 0 1 1 6.5 0 3.25 3.25 0 0 1-6.5 0Zm0-14.5a3.25 3.25 0 1 1 6.5 0 3.25 3.25 0 0 1-6.5 0ZM4.75 3a1.75 1.75 0 1 0 .001 3.501A1.75 1.75 0 0 0 4.75 3Zm0 14.5a1.75 1.75 0 1 0 .001 3.501A1.75 1.75 0 0 0 4.75 17.5Zm14.5 0a1.75 1.75 0 1 0 .001 3.501 1.75 1.75 0 0 0-.001-3.501Z" fill="white">
+        </path>
+        <path d="M13.405 1.72a.75.75 0 0 1 0 1.06L12.185 4h4.065A3.75 3.75 0 0 1 20 7.75v8.75a.75.75 0 0 1-1.5 0V7.75a2.25 2.25 0 0 0-2.25-2.25h-4.064l1.22 1.22a.75.75 0 0 1-1.061 1.06l-2.5-2.5a.75.75 0 0 1 0-1.06l2.5-2.5a.75.75 0 0 1 1.06 0ZM4.75 7.25A.75.75 0 0 1 5.5 8v8A.75.75 0 0 1 4 16V8a.75.75 0 0 1 .75-.75Z" fill="white">
+        </path>
+       </svg>
+      </g>
+
+      <text x="${x - r}" y="${r * 5}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title"> 
+        ${pullRequests}
+      </text>
+
+
+
       `;
     return linesGraph.join("\r\n") + weightedGraph.join("\r\n") + statistics;
   },

@@ -3,7 +3,7 @@ var githubParser = require("./GitHub");
 const app = express();
 const PORT = 4000;
 
-const box = { height: 600, width: 900, curve: 20, border: 10 };
+const box = { height: 600, width: 800, curve: 20, border: 10 };
 const circle = { r: 50 };
 const line = { width: 4 };
 
