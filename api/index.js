@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
         <style type="text/css">
         @import url("https://fonts.googleapis.com/css2?family=Poppins");
             .title {
-              font-family: "Verdana";
+              font-family: "Poppins";
               font-weight: 400;
               font-style: normal; 
               fill: white;
