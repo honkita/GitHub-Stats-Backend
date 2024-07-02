@@ -4,8 +4,8 @@
 
 ![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg)
 
-## Important
+> [!IMPORTANT]
 
-Because of GitHub's rate limit, it is advised to fork this project and deploy on Vercel or a similar platform. Along with this, generating a personal access token is mandatory because without one, the max number of requests per hour is 50.
+> Because of GitHub's rate limit, it is advised to fork this project and deploy on Vercel or a similar platform. Along with this, generating a personal access token is mandatory because without one, the max number of requests per hour is 50.
 
 ## How to use
