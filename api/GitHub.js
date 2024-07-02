@@ -73,13 +73,20 @@ function generateGraph(cx, y, r, name, keys, values, total, c) {
 
 module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
-    // fetch the JSON for the GitHub user's repos
-    const reposFetch = await fetch(
-      "https://api.github.com/search/repositories?q=user:" + user,
-      headerValues
-    );
+    // fetch the JSON for the GitHub user's repos and the number of commits
+    const [repos, totalCommits] = await Promise.all([
+      fetch(
+        "https://api.github.com/search/repositories?q=user:" + user,
+        headerValues
+      ).then((resp) => resp.json()),
+      fetch(
+        "https://api.github.com/search/commits?q=author:" + user,
+        headerValues
+      )
+        .then((resp) => resp.json())
+        .then((resp) => resp["total_count"]),
+    ]);
 
-    const repos = await reposFetch.json();
     const reposJSON = repos["items"];
     const lan = {};
     const weightedLanguages = {};
@@ -92,7 +99,7 @@ module.exports = {
       //console.log(this.posts[i]["name"]);
 
       const pp = await fetch(reposJSON[i]["languages_url"], headerValues);
-      //console.log(reposJSON[i]["languages_url"]);
+
       const ppp = await pp.json();
 
       const [stargazersFetch, pullRequestsFetch, issuesFetch] =
@@ -107,22 +114,20 @@ module.exports = {
             headerValues
           ),
         ]);
-      const stargazersList = await stargazersFetch.json();
+
+      const [stargazersList, pullRequestsList, issuesFetchList] =
+        await Promise.all([
+          stargazersFetch.json(),
+          pullRequestsFetch.json(),
+          issuesFetch.json(),
+        ]);
       starred = starred + stargazersList.length;
-
-      const pullRequestsList = await pullRequestsFetch.json();
       pullRequests = pullRequests + pullRequestsList.length;
-
-      // get pull requests ONLY IF the repo is public
-      const issuesFetchList = await issuesFetch.json();
       issues = issues + issuesFetchList.length;
 
       const sumValues = Object.values(ppp).reduce((a, b) => a + b, 0); // sum of all the lines of code in a given repo
 
       Object.keys(ppp).forEach(function (key) {
-        // console.log(key);
-        // console.log(ppp[key]);
-        // console.log(key in lan);
         if (!(key in Object.keys(lan))) {
           lan[key] = ppp[key];
         } else {
@@ -139,15 +144,6 @@ module.exports = {
         }
       });
     }
-
-    //get the number of commits the user has
-    const commitsFetch = await fetch(
-      "https://api.github.com/search/commits?q=author:" + user,
-      headerValues
-    );
-
-    const commitsFetchJSON = await commitsFetch.json();
-    const totalCommits = await commitsFetchJSON["total_count"];
 
     var sortedDict = getTopValues(lan, limit);
     var sortedWeightedDict = getTopValues(weightedLanguages, limit);
