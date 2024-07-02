@@ -34,3 +34,45 @@ That's it!
 | Parameter | Type    | Description                                                                                                                                                                   |
 | --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | limit     | Integer | Denotes the **max** number of unique languages that can be displayed. The default/absolute max value is 5. If there are more languages, they will be grouped under **Other**. |
+| colour    | String  | Denotes the theme of the colours used for the display.                                                                                                                        |
+
+A code snippet example with the limit set as **3** and the colour theme set as **reds** is as follows:
+
+```
+[![](https://git-hub-stats-backend.vercel.app?github=GITHUB_USERNAME&colour=reds&limit=3)](https://github.com/honkita/GitHub-Stats-Backend)
+```
+
+#### Colour Themes
+
+> [!Note]
+> Currently, there are only two themes. More themes will be implemented soon.
+
+##### default
+
+[![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=default)](https://github.com/honkita/GitHub-Stats-Backend)
+
+##### reds
+
+[![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds)](https://github.com/honkita/GitHub-Stats-Backend)
+
+## Forking and Deploying on Your Own
+
+Before forking and deploying, please generate a Personal Access Token (PAT) on GitHub. This can be done by heading to **Settings**, then **Developer Settings**. Under **Developer Settings**, select **Personal Access Token** and select **Tokens (classic)**. Generate a new classic token. I set the expiration of my token to **No Expiration**. The scopes that must be enabled are as follows:
+
+- repo
+- user
+- read:project
+
+Do **NOT** enable any admin scopes. Once generated, copy the token.
+
+> [!IMPORTANT]
+> Do not close the page until you have copied the token. The page with the token value will NOT be viewable!
+
+> [!CAUTION]
+> Do not share the token with anyone. This token will only be used in one other place, which is on the deployment platform's environment variables section.
+
+The deployment platform that is used for this project is [Vercel](https://vercel.com) Deploy the site as you would with any repository from GitHub. Upon doing so, change the environment variables. Create a variable called **GHTOKEN** and set the value as the PAT. Upon doing so, use as follows, replacing **INSERT_URL_HERE** with the new URL from the deployment platform:
+
+```
+[![](INSERT_URL_HERE?github=GITHUB_USERNAME)](https://github.com/honkita/GitHub-Stats-Backend)
+```

@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
     } else {
       colour = req.query.colour;
     }
-    if (req.query.limit == null || req.query.limit > 5) {
+    if (req.query.limit == null || req.query.limit > 5 || req.query.limit < 1) {
       limit = 5;
     } else {
       limit = req.query.limit;
@@ -43,8 +43,8 @@ app.get("/", (req, res) => {
           box.width,
           box.height,
           circle.r,
-          colour,
-          limit
+          cache.get("colour"),
+          cache.get("limit")
         ),
         60000
       );
