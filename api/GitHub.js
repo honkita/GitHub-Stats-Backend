@@ -32,6 +32,45 @@ function getTopValues(values, limit) {
   return sortedDict;
 }
 
+function generateGraph(cx, y, r, name, keys, values, total, c) {
+  const graph = [];
+  var sum = 0;
+  if (values !== null) {
+    const cy = r * 4;
+    for (let i = 0; i < keys.length; i++) {
+      const portion = values[keys[i]] / total;
+      const percentRounded = (portion * 100).toFixed(2);
+      const circumference = 2 * r * 3.14;
+      const p = portion * circumference;
+      const angle = portion * 360;
+      graph.push(
+        `<circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
+              stroke="${c[i]}"
+              stroke-width="${r * 2}"
+              stroke-dasharray="${p} ${circumference}"
+              transform="rotate(${sum - 90} ${cx} ${cy})"/>
+
+          <circle r="${r / 5}" cx="${cx - r * 2}" cy="${cy + r * 3 + (i * r) / 2}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
+          <text x="${cx - (r / 2) * 3}" y="${cy + r * 3 + (i * r) / 2}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title">
+            ${keys[i]}: ${percentRounded}%
+          </text> 
+
+          `
+      );
+      sum = sum + angle;
+    }
+    graph.push(
+      `
+        <text x="${cx}" y="${y - (r / 2) * 3}" font-size= "40" dominant-baseline="middle" text-anchor="middle" class="title">
+          ${name}
+        </text> 
+      `
+    );
+  }
+
+  return graph;
+}
+
 module.exports = {
   parseLink: async function (user, x, y, r, colour, limit) {
     // fetch the JSON for the GitHub user's repos
@@ -127,81 +166,28 @@ module.exports = {
       0
     );
 
-    let sum = 0;
     const c = colours[colour in colours ? colour : "default"];
 
-    const linesGraph = [];
-    const weightedGraph = [];
-
-    //console.log(colours["default"]);
-    if (sortedDict !== null) {
-      const cx = r * 3;
-      const cy = r * 4;
-      for (let i = 0; i < keys.length; i++) {
-        const portion = sortedDict[keys[i]] / lineTotal;
-        const percentRounded = (portion * 100).toFixed(2);
-        const circumference = 2 * r * 3.14;
-        const p = portion * circumference;
-        const angle = portion * 360;
-        linesGraph.push(
-          `<circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
-                stroke="${c[i]}"
-                stroke-width="${r * 2}"
-                stroke-dasharray="${p} ${circumference}"
-                transform="rotate(${sum - 90} ${cx} ${cy})"/>
-
-            <circle r="${r / 5}" cx="${cx - r * 2}" cy="${cy + r * 3 + (i * r) / 2}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
-            <text x="${cx - (r / 2) * 3}" y="${cy + r * 3 + (i * r) / 2}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title">
-              ${keys[i]}: ${percentRounded}%
-            </text> 
-
-            `
-        );
-        sum = sum + angle;
-      }
-      linesGraph.push(
-        `
-          <text x="${cx}" y="${y - (r / 2) * 3}" font-size= "40" dominant-baseline="middle" text-anchor="middle" class="title">
-              Lines
-          </text> 
-        `
-      );
-    }
-
-    if (sortedWeightedDict !== null) {
-      const cx = r * 9;
-      const cy = r * 4;
-      for (let i = 0; i < weightedkeys.length; i++) {
-        const portion = sortedWeightedDict[weightedkeys[i]] / reposCodeTotal;
-        const percentRounded = (portion * 100).toFixed(2);
-        const circumference = 2 * r * 3.14;
-        const p = portion * circumference;
-        const angle = portion * 360;
-
-        weightedGraph.push(
-          `<circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
-                stroke="${c[i]}"
-                stroke-width="${r * 2}"
-                stroke-dasharray="${p} ${circumference}"
-                transform="rotate(${sum - 90} ${cx} ${cy})"/>
-
-            <circle r="${r / 5}" cx="${cx - r * 2}" cy="${cy + r * 3 + (i * r) / 2}" fill="${c[i]}" stroke-width="3px" stroke="white"/>
-            <text x="${cx - (r / 2) * 3}" y="${cy + r * 3 + (i * r) / 2}" font-size= "20" dominant-baseline="middle" text-anchor="start" class="title">
-              ${weightedkeys[i]}: ${percentRounded}%
-            </text> 
-
-            `
-        );
-        sum = sum + angle;
-      }
-      weightedGraph.push(
-        `
-          <text x="${cx}" y="${y - (r / 2) * 3}" font-size= "40" dominant-baseline="middle" text-anchor="middle" class="title">
-              Repos
-          </text> 
-        `
-      );
-    }
+    const linesGraph = generateGraph(
+      r * 3,
+      y,
+      r,
+      "Lines",
+      keys,
+      sortedDict,
+      lineTotal,
+      c
+    );
+    const weightedGraph = generateGraph(
+      r * 9,
+      y,
+      r,
+      "Repos",
+      weightedkeys,
+      sortedWeightedDict,
+      reposCodeTotal,
+      c
+    );
 
     const scale = 3 / 2;
     var statistics = `
