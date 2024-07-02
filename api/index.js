@@ -8,11 +8,7 @@ const circle = { x: (box.width / 16) * 3, y: box.height / 2, r: 50 };
 
 //github colour is 1B1F23
 app.use(express.json()); // <==== parse request body as JSON
-// console.log("FUCK");
-// let userToken = githubParser.parseLink("honkita");
-// userToken.then(function (result) {
-//   console.log(result); // "Some User token"
-// });
+
 app.get("/", (req, res) => {
   //res.setHeader("Content-Type", "application/json");
   res.setHeader("Content-Type", "image/svg+xml");
@@ -42,15 +38,15 @@ app.get("/", (req, res) => {
   }
 
   link.then(function (result) {
-    link = result; // "Some User token"
+    link = result; // user information
     res.send(
       `<svg xmlns="http://www.w3.org/2000/svg" width="${box.width}" height="${box.height}"  viewBox="0 0 ${box.width} ${box.height}">
       <defs>  
         <style type="text/css">
+        @import url("https://fonts.googleapis.com/css2?family=Poppins");
             .title {
+              font-family: "Poppins", sans-serif;
               font-weight: 400;
-              font-family: 'Playwrite ES Deco';
-              src: url("https://fonts.googleapis.com/css2?family=Playwrite+ES+Deco");
               font-style: normal; 
               fill: white;
             }
