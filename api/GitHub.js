@@ -274,6 +274,6 @@ module.exports = {
 
 
       `;
-    return linesGraph.join("\r\n") + weightedGraph.join("\r\n") + statistics;
+    return linesGraph.join("\r\n") + weightedGraph.join("\r\n");
   },
 };
