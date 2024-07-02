@@ -260,17 +260,17 @@ module.exports = {
         ${pullRequests}
       </text>
 
-      // <g transform="translate(${(r / 2) * 25}, ${r * 7 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      //   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-      //     <path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Zm9.5 2a2 2 0 1 1-.001-3.999A2 2 0 0 1 12 14Z"
-      //       fill="white">
-      //     </path>
-      //   </svg>
-      // </g>
+      <g transform="translate(${(r / 2) * 25}, ${r * 7 - (24 * scale) / 2}) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Zm9.5 2a2 2 0 1 1-.001-3.999A2 2 0 0 1 12 14Z"
+            fill="white">
+          </path>
+        </svg>
+      </g>
       
-      // <text x="${x - r}" y="${r * 7}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title"> 
-      //   ${issues}
-      // </text>
+      <text x="${x - r}" y="${r * 7}" font-size="20" dominant-baseline="middle" text-anchor="end" class="title"> 
+        ${issues}
+      </text>
 
 
       `;
