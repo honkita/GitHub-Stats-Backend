@@ -61,7 +61,7 @@ A code snippet example with the limit set as **3** and the colour theme set as *
 
 ## Forking and Deploying on Your Own
 
-Before forking and deploying, please generate a Personal Access Token (PAT) on GitHub. This can be done by heading to **Settings**, then **Developer Settings**. Under **Developer Settings**, select **Personal Access Token** and select **Tokens (classic)**. Generate a new classic token. I set the expiration of my token to **No Expiration**. The scopes that must be enabled are as follows:
+Before forking and deploying, please generate a Personal Access Token (PAT) on GitHub. This can be done by heading to **Settings**, then **Developer Settings**. Under **Developer Settings**, select **Personal Access Token** and select **Tokens (classic)**. Generate a new classic token. I set the expiration of my token to **No Expiration**, but that is because I am lazy. The scopes that must be enabled are as follows:
 
 -  repo
 -  user
