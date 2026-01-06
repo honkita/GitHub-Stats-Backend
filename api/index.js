@@ -2,6 +2,7 @@ const express = require("express");
 var githubParser = require("./GitHub");
 var cache = require("memory-cache");
 const colours = require("../Assets/colours.json");
+require("gopd/gOPD");
 const app = express();
 const PORT = 4000;
 
