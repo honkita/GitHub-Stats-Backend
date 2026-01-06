@@ -1,10 +1,60 @@
 require("dotenv").config();
 const colours = require("../Assets/colours.json");
+const fs = require("fs");
+const path = require("path");
 
 const headerValues = {
    headers: { Authorization: `bearer ${process.env.GHTOKEN}` },
 };
 
+// Map language names to Devicon filenames
+function normalizeTechName(key) {
+   if (!key) return "";
+   const mapping = {
+      css: "css3",
+      html: "html5",
+      js: "javascript",
+      ts: "typescript",
+   };
+   const lowercase = key.toLowerCase();
+   return mapping[lowercase] || key.toLowerCase();
+}
+
+// Get Devicon SVG inline with white fill
+function getDeviconSVG(tech) {
+   const techName = normalizeTechName(tech);
+   let filePath = path.join(
+      __dirname,
+      "../node_modules/devicon/icons",
+      techName,
+      `${techName}-plain.svg`
+   );
+   if (!fs.existsSync(filePath)) {
+      filePath = path.join(
+         __dirname,
+         "../node_modules/devicon/icons",
+         techName,
+         `${techName}-original.svg`
+      );
+   }
+
+   try {
+      let svg = fs.readFileSync(filePath, "utf-8");
+      svg = svg
+         .replace(/<\?xml.*?\?>/, "")
+         .replace(/<!DOCTYPE.*?>/, "")
+         .replace(/<svg[^>]*>/, "")
+         .replace(/<\/svg>/, "")
+         .replace(/fill=".*?"/g, 'fill="white"')
+         .replace(/<path d=",/g, '<path stroke="#FFFFFF" d=');
+      return svg;
+   } catch (err) {
+      console.warn(`Devicon SVG not found for ${tech}: ${filePath}`);
+      return "";
+   }
+}
+
+// Get top N values and lump the rest into "Other"
 function getTopValues(values, limit) {
    const entries = Object.entries(values).sort(([, a], [, b]) => b - a);
    if (entries.length <= limit) return Object.fromEntries(entries);
@@ -15,40 +65,12 @@ function getTopValues(values, limit) {
    return { ...Object.fromEntries(topEntries), Other: otherTotal };
 }
 
-const fs = require("fs");
-const path = require("path");
-
-// Function to get Devicon SVG
-function getDeviconSVG(tech) {
-   const techName = tech.toLowerCase();
-   const filePath = path.join(
-      __dirname,
-      "../node_modules/devicon/icons",
-      techName,
-      `${techName}-plain.svg`
-   );
-
-   try {
-      let svg = fs.readFileSync(filePath, "utf-8");
-      // Remove XML declaration & <svg> wrapper so it can be inlined
-      svg = svg
-         .replace(/<\?xml.*?\?>/, "")
-         .replace(/<!DOCTYPE.*?>/, "")
-         .replace(/<svg[^>]*>/, "")
-         .replace(/<\/svg>/, "");
-      return svg;
-   } catch (err) {
-      console.warn(`Devicon SVG not found for ${tech}: ${filePath}`);
-      return ""; // fallback: empty
-   }
-}
-
-// Updated generateGraph function with icons + text and bigger icons
+// Generate SVG graph slices, icons, and labels
 function generateGraph(cx, y, r, name, keys, values, total, colors) {
    const graph = [];
    let sumAngle = 0;
 
-   if (values !== null && keys.length > 0) {
+   if (values && keys.length > 0) {
       const cy = r * 4;
       const circumference = 2 * r * Math.PI;
 
@@ -58,41 +80,47 @@ function generateGraph(cx, y, r, name, keys, values, total, colors) {
          const strokeLength = portion * circumference;
          const angle = portion * 360;
 
-         // Get Devicon SVG or fallback text
-         const iconSVG = getDeviconSVG(key);
+         const circleX = cx - r * 2;
+         const circleY = cy + r * 3 + (i * r) / 2;
 
-         // Adjust scale for bigger icons
-         const iconScale = 0.5;
+         // Devicon inline SVG
+         const iconSVG = key === "Other" ? "" : getDeviconSVG(key);
+         const iconScale = key === "Other" ? 0.2 : 0.18;
+
+         // Center icon vertically relative to small circle
+         const iconYOffset = -12; // tweak this to visually center
 
          graph.push(`
                 <circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
-                    stroke="${colors[i]}"
+                    stroke="${colors[i] || "#888"}"
                     stroke-width="${r * 2}"
                     stroke-dasharray="${strokeLength} ${circumference}"
                     transform="rotate(${sumAngle - 90} ${cx} ${cy})"/>
-                <circle r="${r / 5}" cx="${cx - r * 2}" cy="${
-            cy + r * 3 + (i * r) / 2
-         }"
-                    fill="${colors[i]}" stroke-width="3px" stroke="white"/>
                 
-                <!-- Devicon icon -->
-                <g transform="translate(${cx - r * 2}, ${
-            cy + r * 3 + (i * r) / 2 - 12
-         }) scale(${iconScale})">
-                    ${iconSVG}
-                </g>
+                <circle r="${r / 5}" cx="${circleX}" cy="${circleY}"
+                    fill="${
+                       colors[i] || "#888"
+                    }" stroke-width="3px" stroke="white"/>
 
-                <!-- Text label (language + %) -->
-                <text x="${cx - r * 2 + 40}" y="${cy + r * 3 + (i * r) / 2}"
+                ${
+                   iconSVG
+                      ? `<g transform="translate(${circleX + 20}, ${
+                           circleY + iconYOffset
+                        }) scale(${iconScale})">${iconSVG}</g>`
+                      : `<text x="${circleX}" y="${
+                           circleY + 6
+                        }" font-size="16" fill="white" dominant-baseline="middle" text-anchor="middle">Other</text>`
+                }
+
+                <text x="${circleX + 52}" y="${circleY}"
                     font-size="20" dominant-baseline="middle" text-anchor="start" class="title">
-                    ${key}: ${percentRounded}%
+                    ${percentRounded}%
                 </text>
             `);
 
          sumAngle += angle;
       });
 
-      // Graph title
       graph.push(`
             <text x="${cx}" y="${y - (r / 2) * 3}"
                 font-size="40" dominant-baseline="middle" text-anchor="middle" class="title">
@@ -104,8 +132,8 @@ function generateGraph(cx, y, r, name, keys, values, total, colors) {
    return graph;
 }
 
+// Main function to fetch GitHub data and produce SVG content
 async function parseLink(user, x, y, r, colour, limit) {
-   // Fetch repositories and commit count concurrently
    const [reposJSON, totalCommits] = await Promise.all([
       fetch(
          `https://api.github.com/search/repositories?q=user:${user}`,
@@ -122,6 +150,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    ]);
 
    const numRepos = reposJSON.length;
+
    let starred = 0,
       pullRequests = 0,
       issues = 0,
@@ -130,7 +159,6 @@ async function parseLink(user, x, y, r, colour, limit) {
    const lan = {};
    const weightedLanguages = {};
 
-   // Process each repository concurrently
    await Promise.all(
       reposJSON.map(async (repo) => {
          const [repoLang, pulls, repoIssues] = await Promise.all([
@@ -164,6 +192,7 @@ async function parseLink(user, x, y, r, colour, limit) {
 
    const sortedLan = getTopValues(lan, limit);
    const sortedWeightedLan = getTopValues(weightedLanguages, limit);
+
    const keys = Object.keys(sortedLan);
    const weightedKeys = Object.keys(sortedWeightedLan);
    const lineTotal = Object.values(sortedLan).reduce(
@@ -177,7 +206,7 @@ async function parseLink(user, x, y, r, colour, limit) {
 
    const colors = colours[colour in colours ? colour : "default"].colours;
 
-   // Generate the graphs
+   // Generate graphs
    const linesGraph = generateGraph(
       r * 3,
       y,
@@ -289,6 +318,7 @@ async function parseLink(user, x, y, r, colour, limit) {
       ${forks}
     </text>
   `;
+
    return linesGraph.join("\n") + weightedGraph.join("\n") + statistics;
 }
 
