@@ -15,7 +15,7 @@
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Lines         | Displays graphically the number of lines coded with a given language and displays the user's top languages.                                                                                                                                                                                |
 | Repos         | Displays graphically the percentage of repos coded with a given language and displays the user's top languages.                                                                                                                                                                            |
-| Miscellaneous | Displays the following information from top to bottom: <ul><li>Number of Repos</li><li>Total number of commits</li><li>Total number of atars</li><li>Total number of fetch requests</li><li>Total number of issues</li><li>Total number of viewers</li><li>Total number of forks</li></ul> |
+| Miscellaneous | Displays the following information from top to bottom: <ul><li>Number of Repos</li><li>Total number of commits</li><li>Total number of stars</li><li>Total number of fetch requests</li><li>Total number of issues</li><li>Total number of viewers</li><li>Total number of forks</li></ul> |
 
 ## How to use
 
