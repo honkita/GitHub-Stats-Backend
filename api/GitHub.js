@@ -15,42 +15,92 @@ function getTopValues(values, limit) {
    return { ...Object.fromEntries(topEntries), Other: otherTotal };
 }
 
+const fs = require("fs");
+const path = require("path");
+
+// Function to get Devicon SVG
+function getDeviconSVG(tech) {
+   const techName = tech.toLowerCase();
+   const filePath = path.join(
+      __dirname,
+      "../node_modules/devicon/icons",
+      techName,
+      `${techName}-plain.svg`
+   );
+
+   try {
+      let svg = fs.readFileSync(filePath, "utf-8");
+      // Remove XML declaration & <svg> wrapper so it can be inlined
+      svg = svg
+         .replace(/<\?xml.*?\?>/, "")
+         .replace(/<!DOCTYPE.*?>/, "")
+         .replace(/<svg[^>]*>/, "")
+         .replace(/<\/svg>/, "");
+      return svg;
+   } catch (err) {
+      console.warn(`Devicon SVG not found for ${tech}: ${filePath}`);
+      return ""; // fallback: empty
+   }
+}
+
+// Updated generateGraph function with icons + text and bigger icons
 function generateGraph(cx, y, r, name, keys, values, total, colors) {
    const graph = [];
    let sumAngle = 0;
-   if (values !== null) {
+
+   if (values !== null && keys.length > 0) {
       const cy = r * 4;
       const circumference = 2 * r * Math.PI;
+
       keys.forEach((key, i) => {
          const portion = values[key] / total;
          const percentRounded = (portion * 100).toFixed(2);
          const strokeLength = portion * circumference;
          const angle = portion * 360;
+
+         // Get Devicon SVG or fallback text
+         const iconSVG = getDeviconSVG(key);
+
+         // Adjust scale for bigger icons
+         const iconScale = 0.5;
+
          graph.push(`
-        <circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
-          stroke="${colors[i]}"
-          stroke-width="${r * 2}"
-          stroke-dasharray="${strokeLength} ${circumference}"
-          transform="rotate(${sumAngle - 90} ${cx} ${cy})"/>
-        <circle r="${r / 5}" cx="${cx - r * 2}" cy="${
+                <circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
+                    stroke="${colors[i]}"
+                    stroke-width="${r * 2}"
+                    stroke-dasharray="${strokeLength} ${circumference}"
+                    transform="rotate(${sumAngle - 90} ${cx} ${cy})"/>
+                <circle r="${r / 5}" cx="${cx - r * 2}" cy="${
             cy + r * 3 + (i * r) / 2
-         }" fill="${colors[i]}" stroke-width="3px" stroke="white"/>
-        <text x="${cx - (r / 2) * 3}" y="${
-            cy + r * 3 + (i * r) / 2
-         }" font-size="20" dominant-baseline="middle" text-anchor="start" class="title">
-          ${key}: ${percentRounded}%
-        </text>
-      `);
+         }"
+                    fill="${colors[i]}" stroke-width="3px" stroke="white"/>
+                
+                <!-- Devicon icon -->
+                <g transform="translate(${cx - r * 2}, ${
+            cy + r * 3 + (i * r) / 2 - 12
+         }) scale(${iconScale})">
+                    ${iconSVG}
+                </g>
+
+                <!-- Text label (language + %) -->
+                <text x="${cx - r * 2 + 40}" y="${cy + r * 3 + (i * r) / 2}"
+                    font-size="20" dominant-baseline="middle" text-anchor="start" class="title">
+                    ${key}: ${percentRounded}%
+                </text>
+            `);
+
          sumAngle += angle;
       });
+
+      // Graph title
       graph.push(`
-      <text x="${cx}" y="${
-         y - (r / 2) * 3
-      }" font-size="40" dominant-baseline="middle" text-anchor="middle" class="title">
-        ${name}
-      </text>
-    `);
+            <text x="${cx}" y="${y - (r / 2) * 3}"
+                font-size="40" dominant-baseline="middle" text-anchor="middle" class="title">
+                ${name}
+            </text>
+        `);
    }
+
    return graph;
 }
 
