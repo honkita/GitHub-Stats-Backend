@@ -3,6 +3,7 @@ require("gopd");
 const colours = require("../Assets/colours.json");
 const fs = require("fs");
 const path = require("path");
+require("gopd/gOPD");
 
 const headerValues = {
    headers: { Authorization: `Bearer ${process.env.GHTOKEN}` },
