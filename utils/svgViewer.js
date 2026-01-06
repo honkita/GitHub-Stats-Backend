@@ -1,5 +1,15 @@
 const fs = require("fs");
 const path = require("path");
+const octicons = require("@primer/octicons");
+
+function getStatsIcon(name) {
+   let filePath = path.join(
+      __dirname,
+      "../node_modules/@primer/octicons/build/svg",
+      `${name}-24.svg`
+   );
+   return svgModifier(filePath).replace(/\s*\/>/g, ' fill="white"/>');
+}
 
 // Map language names to Devicon filenames
 function normalizeTechName(key) {
@@ -34,19 +44,6 @@ function svgModifier(filePath) {
       console.warn(`Devicon SVG not found for ${filePath}`);
       return "";
    }
-}
-
-/**
- * Gets the stats icon SVG for a user
- * @param {string} stat
- * @returns
- */
-function getStatsIcon(stat) {
-   let filePath = path.join(__dirname, "../Assets/", `${stat}.svg`);
-   return svgModifier(filePath).replace(
-      /"\s*><\/path>/g,
-      '" fill="white" stroke="white"></path>'
-   );
 }
 
 /**
