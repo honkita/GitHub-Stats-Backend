@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("gopd");
 const colours = require("../Assets/colours.json");
 const fs = require("fs");
 const path = require("path");
