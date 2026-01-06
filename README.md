@@ -45,27 +45,27 @@ A code snippet example with the limit set as **3** and the colour theme set as *
 #### Colour Themes
 
 > [!Note]
-> Currently, there are only two themes. More themes will be implemented soon.
+> Currently, there are only four themes. More themes will be implemented soon.
 
 <table>
   <tr>
     <td>
-      ##### default<br>
-      [![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=default)](https://github.com/honkita/GitHub-Stats-Backend)
+       <h5>default</h5>
+        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=default"/></center>
     </td>
     <td>
-      ##### reds<br>
-      [![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds)](https://github.com/honkita/GitHub-Stats-Backend)
+      <h5>reds</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds"/></center>
     </td>
   </tr>
   <tr>
     <td>
-      ##### blues<br>
-      [![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=blues)](https://github.com/honkita/GitHub-Stats-Backend)
+      <h5>blues</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=blues"/></center>
     </td>
     <td>
-      ##### greens<br>
-      [![](https://git-hub-stats-backend.vercel.app?github=honkita&colour=greens)](https://github.com/honkita/GitHub-Stats-Backend)
+      <h5>breeze</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=breeze"/></center>
     </td>
   </tr>
 </table>
