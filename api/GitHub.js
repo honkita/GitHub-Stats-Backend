@@ -178,8 +178,9 @@ async function parseLink(user, x, y, r, colour, limit) {
    );
 
    const scale = 1.5;
+   const stats_x = (r / 2) * 25;
    const statistics = `
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 3 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
       ${getStatsIcon("repo")}
@@ -189,7 +190,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
       ${numRepos}
     </text>
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 4 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
        ${getStatsIcon("git-commit")}
@@ -199,7 +200,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
       ${totalCommits}
     </text>
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 5 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
       ${getStatsIcon("star")}
@@ -209,7 +210,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
       ${starred}
     </text>
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 6 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
       ${getStatsIcon("git-pull-request")}
@@ -219,7 +220,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
       ${pullRequests}
     </text>
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 7 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
       ${getStatsIcon("issue-opened")}
@@ -229,7 +230,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
       ${issues}
     </text>
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 8 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
       ${getStatsIcon("eye")}
@@ -239,7 +240,7 @@ async function parseLink(user, x, y, r, colour, limit) {
    }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
       ${watchers}
     </text>
-    <g transform="translate(${(r / 2) * 25}, ${
+    <g transform="translate(${stats_x}, ${
       r * 9 - (24 * scale) / 2
    }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
       ${getStatsIcon("git-branch")}
