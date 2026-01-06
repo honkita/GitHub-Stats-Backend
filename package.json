@@ -21,6 +21,7 @@
       "serve-favicon": "^2.5.1"
    },
    "devDependencies": {
+      "@ljharb/tsconfig": "^0.3.2",
       "nodemon": "^3.1.3"
    }
 }
