@@ -64,8 +64,8 @@ A code snippet example with the limit set as **3** and the colour theme set as *
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=blues"/></center>
     </td>
     <td>
-      <h5>breeze</h5>
-      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=breeze"/></center>
+      <h5>breezy</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=breezy"/></center>
     </td>
   </tr>
 </table>
