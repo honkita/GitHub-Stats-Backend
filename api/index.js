@@ -14,7 +14,6 @@ app.use(express.json()); // <==== parse request body as JSON
 var colour;
 
 app.get("/", (req, res) => {
-   //res.setHeader("Content-Type", "application/json");
    res.setHeader("Content-Type", "image/svg+xml");
    var link;
    if (req.query.github != null) {

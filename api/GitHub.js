@@ -49,13 +49,6 @@ function svgModifier(filePath) {
  */
 function getStatsIcon(stat) {
    let filePath = path.join(__dirname, "../Assets/", `${stat}.svg`);
-   console.log(
-      stat,
-      svgModifier(filePath).replace(
-         /"\s*><\/path>/g,
-         '" fill="white" stroke="white"></path>'
-      )
-   );
    return svgModifier(filePath).replace(
       /"\s*><\/path>/g,
       '" fill="white" stroke="white"></path>'
