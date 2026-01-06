@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const headerValues = {
-   headers: { Authorization: `bearer ${process.env.GHTOKEN}` },
+   headers: { Authorization: `Bearer ${process.env.GHTOKEN}` },
 };
 
 // Map language names to Devicon filenames
