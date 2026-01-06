@@ -57,23 +57,19 @@ A code snippet example with the limit set as **3** and the colour theme set as *
       <h5>reds</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds"/></center>
     </td>
-  </tr>
-  <tr>
     <td>
       <h5>blues</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=blues"/></center>
     </td>
+  </tr>
+  <tr>
     <td>
       <h5>breezy</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=breezy"/></center>
     </td>
-  </tr>
-  <tr>
     <td>
       <h5>smol</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=smol"/></center>
-    </td>
-    <td>
     </td>
   </tr>
 </table>
