@@ -1,5 +1,5 @@
 const express = require("express");
-const { parseLink } = require("./GitHub");
+var githubParser = require("./GitHub");
 var cache = require("memory-cache");
 const colours = require("../Assets/colours.json");
 const app = express();
@@ -9,11 +9,12 @@ const box = { height: 600, width: 800, curve: 20, border: 10 };
 const circle = { r: 50 };
 const line = { width: 4 };
 
-// GitHub colour is 1B1F23
+//github colour is 1B1F23
 app.use(express.json()); // <==== parse request body as JSON
 var colour;
 
 app.get("/", (req, res) => {
+   //res.setHeader("Content-Type", "application/json");
    res.setHeader("Content-Type", "image/svg+xml");
    var link;
    if (req.query.github != null) {
@@ -41,7 +42,7 @@ app.get("/", (req, res) => {
          cache.put("limit", limit, 60000);
          cache.put(
             "link",
-            parseLink(
+            githubParser.parseLink(
                req.query.github,
                box.width,
                box.height,
