@@ -86,7 +86,7 @@ app.get("/", (req, res) => {
             box.border
          };stroke:white" /> 
           <g transform="translate(${box.border * 2}, ${
-            box.border * 2 - 12
+            box.border * 2
          }) scale(0.5)" dominant-baseline="middle" text-anchor="left">
             ${getDeviconSVG("github")}
           </g>

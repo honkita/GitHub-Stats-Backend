@@ -90,7 +90,7 @@ Do **NOT** enable any admin scopes. Once generated, copy the token.
 > [!CAUTION]
 > Do not share the token with anyone. This token will only be used in one other place, which is on the deployment platform's environment variables section.
 
-The deployment platform that is used for this project is [Vercel](https://vercel.com) Deploy the site as you would with any repository from GitHub. Upon doing so, change the environment variables. Create a variable called **GHTOKEN** and set the value as the PAT. Upon doing so, use as follows, replacing **INSERT_URL_HERE** with the new URL from the deployment platform:
+The deployment platform that is used for this project is [Vercel](https://vercel.com). Deploy the site as you would with any repository from GitHub. Upon doing so, change the environment variables. Create a variable called **GHTOKEN** and set the value as the PAT. Upon doing so, use as follows, replacing **INSERT_URL_HERE** with the new URL from the deployment platform:
 
 ```
 [![](INSERT_URL_HERE?github=GITHUB_USERNAME)](https://github.com/honkita/GitHub-Stats-Backend)
