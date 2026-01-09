@@ -9,7 +9,12 @@ const headerValues = {
    headers: { Authorization: `Bearer ${process.env.GHTOKEN}` },
 };
 
-// Get top N values and lump the rest into "Other"
+/**
+ * Get top N values from an object, aggregating the rest into "Other"
+ * @param {Object} values
+ * @param {number} limit
+ * @returns {Object}
+ */
 function getTopValues(values, limit) {
    const entries = Object.entries(values).sort(([, a], [, b]) => b - a);
    if (entries.length <= limit) return Object.fromEntries(entries);
@@ -20,7 +25,18 @@ function getTopValues(values, limit) {
    return { ...Object.fromEntries(topEntries), Other: otherTotal };
 }
 
-// Generate SVG graph slices, icons, and labels
+/**
+ *
+ * @param {number} cx
+ * @param {number} y
+ * @param {number} r
+ * @param {string} name
+ * @param {Array} keys
+ * @param {Object} values
+ * @param {number} total
+ * @param {Array} colors
+ * @returns {Array} SVG elements as strings
+ */
 function generateGraph(cx, y, r, name, keys, values, total, colors) {
    const graph = [];
    let sumAngle = 0;
@@ -81,7 +97,16 @@ function generateGraph(cx, y, r, name, keys, values, total, colors) {
    return graph;
 }
 
-// Main function to fetch GitHub data and produce SVG content
+/**
+ *
+ * @param {string} user
+ * @param {number} x
+ * @param {number} y
+ * @param {number} r
+ * @param {string} colour
+ * @param {number} limit
+ * @returns
+ */
 async function parseLink(user, x, y, r, colour, limit) {
    const [reposJSON, totalCommits] = await Promise.all([
       fetch(

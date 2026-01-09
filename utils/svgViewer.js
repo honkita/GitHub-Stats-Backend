@@ -1,17 +1,29 @@
 const fs = require("fs");
 const path = require("path");
-const octicons = require("@primer/octicons");
 
+colours = require("../Assets/colours.json");
+
+lineColour = "#FFFFFF";
+
+/**
+ * Returns the Stats Icon SVG for a given name
+ * @param {string} name
+ * @returns
+ */
 function getStatsIcon(name) {
    let filePath = path.join(
       __dirname,
       "../node_modules/@primer/octicons/build/svg",
       `${name}-24.svg`
    );
-   return svgModifier(filePath).replace(/\s*\/>/g, ' fill="white"/>');
+   return svgModifier(filePath).replace(/\s*\/>/g, ` fill="${lineColour}"/>`);
 }
 
-// Map language names to Devicon filenames
+/**
+ * Normalizes tech names to match Devicon naming conventions
+ * @param {string} key
+ * @returns
+ */
 function normalizeTechName(key) {
    if (!key) return "";
    const mapping = {
@@ -25,7 +37,7 @@ function normalizeTechName(key) {
 }
 
 /**
- * Modifies the SVG file to fit styling and make white
+ * Modifies the SVG file to fit styling and change colour
  * @param {string} filePath
  * @returns
  */
@@ -37,7 +49,7 @@ function svgModifier(filePath) {
          .replace(/<!DOCTYPE.*?>/, "")
          .replace(/<svg[^>]*>/, "")
          .replace(/<\/svg>/, "")
-         .replace(/fill=".*?"/g, 'fill="white"');
+         .replace(/fill=".*?"/g, `fill="${lineColour}"`);
 
       return svg;
    } catch (err) {
@@ -71,7 +83,7 @@ function getDeviconSVG(tech) {
       );
       return svgModifier(filePath).replace(
          /\s*\/>/g,
-         ' fill="white" stroke="white" />'
+         ` fill="${lineColour}" stroke="${lineColour}" />`
       );
    }
    return svgModifier(filePath);
