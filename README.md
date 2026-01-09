@@ -49,7 +49,7 @@ A code snippet example with the limit set as **3** and the colour theme set as *
 #### Colour Themes
 
 > [!Note]
-> Currently, there are only five themes. More themes will be implemented soon.
+> Currently, there are only six themes. More themes will be implemented soon.
 
 <table>
   <tr>
@@ -76,6 +76,10 @@ A code snippet example with the limit set as **3** and the colour theme set as *
   <td>
       <h5>smol</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=smol"/></center>
+    </td>
+    <td>
+      <h5>cur</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=cur"/></center>
     </td>
   </tr>
 </table>
