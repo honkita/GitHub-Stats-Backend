@@ -88,6 +88,8 @@ A code snippet example with the limit set as **3** and the colour theme set as *
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=fox"/></center>
     </td>
     <td>
+       <h5>owl</h5>
+        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=owl"/></center>
     </td>
   </tr>
   <tr>
