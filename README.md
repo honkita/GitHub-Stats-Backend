@@ -40,16 +40,16 @@ That's it!
 | limit     | Integer | Denotes the **max** number of unique languages that can be displayed. The default/absolute max value is 5. If there are more languages, they will be grouped under **Other**. |
 | colour    | String  | Denotes the theme of the colours used for the display.                                                                                                                        |
 
-A code snippet example with the limit set as **3** and the colour theme set as **reds** is as follows:
+A code snippet example with the limit set as **3** and the colour theme set as **mono_red** is as follows:
 
 ```
-[![](https://git-hub-stats-backend.vercel.app?github=GITHUB_USERNAME&colour=reds&limit=3)](https://github.com/honkita/GitHub-Stats-Backend)
+[![](https://git-hub-stats-backend.vercel.app?github=GITHUB_USERNAME&colour=mono_red&limit=3)](https://github.com/honkita/GitHub-Stats-Backend)
 ```
 
 ## Colour Themes
 
 > [!Note]
-> The default scheme is mono_dark.
+> The default scheme is \*\*mono_dark.
 
 ### Monochromes
 
