@@ -73,7 +73,7 @@ function getDeviconSVG(tech) {
    );
 
    if (techName === "other") {
-      filePath = path.join(__dirname, "../Assets/other.svg");
+      return getStatsIcon("code");
    } else if (!fs.existsSync(filePath)) {
       filePath = path.join(
          __dirname,

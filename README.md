@@ -9,7 +9,7 @@
 
 This is a simple lightweight backend service that generates SVG images displaying GitHub statistics for a given user. The statistics include the number of lines coded in different programming languages, the percentage of repositories coded in those languages, and miscellaneous information such as the total number of repositories, commits, stars, fetch requests, issues, viewers, and forks.
 
-The icons are sourced from [Devicon](https://devicon.dev/), an open-source project that provides a set of icons representing various programming languages and technologies.
+The icons are sourced from [Devicon](https://devicon.dev/) and [Octicons](https://primer.style/octicons/), open-source projects that provide a set of icons representing various programming languages and technologies.
 
 ## Display Information
 
@@ -58,35 +58,41 @@ A code snippet example with the limit set as **3** and the colour theme set as *
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=default"/></center>
     </td>
     <td>
-      <h5>reds</h5>
-      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds"/></center>
+      <h5>slate</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=slate"/></center>
     </td>
   </tr>
   <tr>
-  <td>
+    <td>
+      <h5>reds</h5>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds"/></center>
+    </td>
+    <td>
       <h5>blues</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=blues"/></center>
     </td>
+  </tr>
+  <tr>
     <td>
       <h5>breezy</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=breezy"/></center>
     </td>
-  </tr>
-  <tr>
-  <td>
+    <td>
       <h5>olive</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=olive"/></center>
     </td>
+  </tr>
+  <tr>
     <td>
       <h5>cur</h5>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=cur"/></center>
     </td>
-  </tr>
-  <tr>
     <td>
        <h5>fox</h5>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=fox"/></center>
     </td>
+  </tr>
+  <tr>
     <td>
        <h5>owl</h5>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=owl"/></center>

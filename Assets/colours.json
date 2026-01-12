@@ -1,5 +1,16 @@
 {
    "default": {
+      "background": "#1F1F1F",
+      "colours": [
+         "#1A1A1A",
+         "#2B2B2B",
+         "#363636",
+         "#545454",
+         "#676767",
+         "#808080"
+      ]
+   },
+   "slate": {
       "background": "#36454F",
       "colours": [
          "#C6C5B9",
