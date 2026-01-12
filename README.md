@@ -49,15 +49,15 @@ A code snippet example with the limit set as **3** and the colour theme set as *
 ## Colour Themes
 
 > [!Note]
-> More themes will be implemented soon.
+> The default scheme is mono_dark.
 
 ### Monochromes
 
 <table>
   <tr>
     <td>
-       <h4>default</h4>
-        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=default"/></center>
+       <h4>mono_dark</h4>
+        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_dark"/></center>
     </td>
     <td>
       <h4>reds</h4>

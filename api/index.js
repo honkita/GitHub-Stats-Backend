@@ -21,8 +21,8 @@ app.get("/", (req, res) => {
    var link;
    if (req.query.github != null) {
       if (req.query.colour == null) {
-         colour = "default";
-         cache.put("colour", "default", 60000);
+         colour = "mono_dark";
+         cache.put("colour", "mono_dark", 60000);
       } else {
          colour = req.query.colour;
       }
