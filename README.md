@@ -46,55 +46,68 @@ A code snippet example with the limit set as **3** and the colour theme set as *
 [![](https://git-hub-stats-backend.vercel.app?github=GITHUB_USERNAME&colour=reds&limit=3)](https://github.com/honkita/GitHub-Stats-Backend)
 ```
 
-#### Colour Themes
+## Colour Themes
 
 > [!Note]
 > More themes will be implemented soon.
 
+### Monochromes
+
 <table>
   <tr>
     <td>
-       <h5>default</h5>
+       <h4>default</h4>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=default"/></center>
     </td>
     <td>
-      <h5>slate</h5>
-      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=slate"/></center>
+      <h4>reds</h4>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds"/></center>
     </td>
   </tr>
   <tr>
     <td>
-      <h5>reds</h5>
-      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=reds"/></center>
-    </td>
-    <td>
-      <h5>blues</h5>
+      <h4>blues</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=blues"/></center>
     </td>
   </tr>
+</table>
+
+### Atmospherics
+
+<table>
   <tr>
     <td>
-      <h5>breezy</h5>
+      <h4>slate</h4>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=slate"/></center>
+    </td>
+    <td>
+      <h4>breezy</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=breezy"/></center>
     </td>
+  </tr>
+  <tr>
+</table>
+
+### Motifs
+
+<table>
+  <tr>
     <td>
-      <h5>olive</h5>
+      <h4>olive</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=olive"/></center>
     </td>
-  </tr>
-  <tr>
     <td>
-      <h5>cur</h5>
+      <h4>cur</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=cur"/></center>
     </td>
-    <td>
-       <h5>fox</h5>
-        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=fox"/></center>
-    </td>
   </tr>
   <tr>
     <td>
-       <h5>owl</h5>
+       <h4>fox</h4>
+        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=fox"/></center>
+    </td>
+    <td>
+       <h4>owl</h4>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=owl"/></center>
     </td>
   </tr>
