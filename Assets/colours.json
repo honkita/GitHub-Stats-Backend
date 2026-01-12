@@ -21,7 +21,7 @@
          "#36311F"
       ]
    },
-   "reds": {
+   "mono_red": {
       "background": "#A83B39",
       "colours": [
          "#C11E38",
@@ -32,7 +32,7 @@
          "#721536"
       ]
    },
-   "blues": {
+   "mono_blue": {
       "background": "#0A185F",
       "colours": [
          "#0A185F",
