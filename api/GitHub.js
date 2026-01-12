@@ -5,6 +5,7 @@ const colours = require("../Assets/colours.json");
 const svgViewer = require("../utils/svgViewer");
 const { getDeviconSVG, getStatsIcon } = svgViewer;
 
+// GitHub API header with token
 const headerValues = {
    headers: { Authorization: `Bearer ${process.env.GHTOKEN}` },
 };
@@ -13,7 +14,7 @@ const headerValues = {
  * Get top N values from an object, aggregating the rest into "Other"
  * @param {Object} values
  * @param {number} limit
- * @returns {Object}
+ * @returns {Object} Returns the top values with "Other" aggregated
  */
 function getTopValues(values, limit) {
    const entries = Object.entries(values).sort(([, a], [, b]) => b - a);
@@ -26,7 +27,7 @@ function getTopValues(values, limit) {
 }
 
 /**
- *
+ * Generate SVG graph elements
  * @param {number} cx
  * @param {number} y
  * @param {number} r
@@ -98,7 +99,7 @@ function generateGraph(cx, y, r, name, keys, values, total, colors) {
 }
 
 /**
- *
+ * Parse GitHub user data and generate SVG elements
  * @param {string} user
  * @param {number} x
  * @param {number} y
@@ -204,78 +205,35 @@ async function parseLink(user, x, y, r, colour, limit) {
 
    const scale = 1.5;
    const stats_x = (r / 2) * 25;
-   const statistics = `
-    <g transform="translate(${stats_x}, ${
-      r * 3 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      ${getStatsIcon("repo")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 3
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${numRepos}
-    </text>
-    <g transform="translate(${stats_x}, ${
-      r * 4 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-       ${getStatsIcon("git-commit")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 4
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${totalCommits}
-    </text>
-    <g transform="translate(${stats_x}, ${
-      r * 5 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      ${getStatsIcon("star")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 5
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${starred}
-    </text>
-    <g transform="translate(${stats_x}, ${
-      r * 6 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      ${getStatsIcon("git-pull-request")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 6
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${pullRequests}
-    </text>
-    <g transform="translate(${stats_x}, ${
-      r * 7 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      ${getStatsIcon("issue-opened")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 7
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${issues}
-    </text>
-    <g transform="translate(${stats_x}, ${
-      r * 8 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      ${getStatsIcon("eye")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 8
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${watchers}
-    </text>
-    <g transform="translate(${stats_x}, ${
-      r * 9 - (24 * scale) / 2
-   }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-      ${getStatsIcon("git-branch")}
-    </g>
-    <text x="${x - r}" y="${
-      r * 9
-   }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
-      ${forks}
-    </text>
-  `;
+
+   const side_info = [
+      { icon: "repo", value: numRepos },
+      { icon: "git-commit", value: totalCommits },
+      { icon: "star", value: starred },
+      { icon: "git-pull-request", value: pullRequests },
+      { icon: "issue-opened", value: issues },
+      { icon: "eye", value: watchers },
+      { icon: "git-branch", value: forks },
+   ];
+
+   const statistics = side_info
+      .map(({ icon, value }, index) => {
+         const row = index + 3; // matches r * 3 ... r * 9
+
+         return `
+      <g transform="translate(${stats_x}, ${
+            r * row - (24 * scale) / 2
+         }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
+        ${getStatsIcon(icon)}
+      </g>
+      <text x="${x - r}" y="${
+            r * row
+         }" font-size="20" dominant-baseline="middle" text-anchor="end" class="title">
+        ${value}
+      </text>
+    `;
+      })
+      .join("");
 
    return linesGraph.join("\n") + weightedGraph.join("\n") + statistics;
 }
