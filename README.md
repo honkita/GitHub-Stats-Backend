@@ -48,8 +48,8 @@ A code snippet example with the limit set as **3** and the colour theme set as *
 
 ## Colour Themes
 
-> [!Note]
-> The default scheme is **mono_dark**.
+> [!NOTE]
+> The default scheme is **`mono_dark`**.
 
 ### Monochromes
 
