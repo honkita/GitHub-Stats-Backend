@@ -69,6 +69,10 @@ A code snippet example with the limit set as **3** and the colour theme set as *
       <h4>mono_blue</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_blue"/></center>
     </td>
+     <td>
+      <h4>mono_green</h4>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_green"/></center>
+    </td>
   </tr>
 </table>
 
@@ -86,6 +90,11 @@ A code snippet example with the limit set as **3** and the colour theme set as *
     </td>
   </tr>
   <tr>
+  <td>
+      <h4>aqua</h4>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=aqua"/></center>
+    </td>
+  </tr>
 </table>
 
 ### Motifs
