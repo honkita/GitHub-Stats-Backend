@@ -131,6 +131,10 @@ A code snippet example with the limit set as **3** and the colour theme set as *
        <h4>wolf</h4>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=wolf"/></center>
     </td>
+    <td>
+       <h4>mech</h4>
+        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mech"/></center>
+    </td>
   </tr>
 </table>
 
