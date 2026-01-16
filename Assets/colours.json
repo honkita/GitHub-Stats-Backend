@@ -1,17 +1,31 @@
 {
    "mono_dark": {
       "background": "#1F1F1F",
+      "line": "#FFFFFF",
       "colours": [
-         "#1A1A1A",
-         "#2B2B2B",
-         "#363636",
-         "#545454",
-         "#676767",
-         "#808080"
+         "#1B1B1B",
+         "#3E3E3E",
+         "#616161",
+         "#848484",
+         "#A7A7A7",
+         "#CACACA"
+      ]
+   },
+   "mono_light": {
+      "background": "#FFFFFF",
+      "line": "#000000",
+      "colours": [
+         "#EAEAEA",
+         "#C7C7C7",
+         "#A4A4A4",
+         "#818181",
+         "#5E5E5E",
+         "#3B3B3B"
       ]
    },
    "mono_red": {
       "background": "#A83B39",
+      "line": "#FFFFFF",
       "colours": [
          "#C11E38",
          "#B11C38",
@@ -23,6 +37,7 @@
    },
    "mono_blue": {
       "background": "#0A185F",
+      "line": "#FFFFFF",
       "colours": [
          "#0A185F",
          "#23278D",
@@ -34,6 +49,7 @@
    },
    "mono_green": {
       "background": "#023D23",
+      "line": "#FFFFFF",
       "colours": [
          "#005A40",
          "#238B48",
@@ -45,6 +61,7 @@
    },
    "slate": {
       "background": "#36454F",
+      "line": "#FFFFFF",
       "colours": [
          "#C6C5B9",
          "#62929E",
@@ -55,7 +72,8 @@
       ]
    },
    "breezy": {
-      "background": "#72bad5",
+      "background": "#72BAD5",
+      "line": "#FFFFFF",
       "colours": [
          "#0E4C6F",
          "#8499B3",
@@ -67,6 +85,7 @@
    },
    "aqua": {
       "background": "#233844",
+      "line": "#FFFFFF",
       "colours": [
          "#285A6B",
          "#378479",
@@ -78,6 +97,7 @@
    },
    "olive": {
       "background": "#BCCE5E",
+      "line": "#FFFFFF",
       "colours": [
          "#3B233B",
          "#7CB858",
@@ -89,6 +109,7 @@
    },
    "cur": {
       "background": "#28195B",
+      "line": "#FFFFFF",
       "colours": [
          "#A82414",
          "#E3B36E",
@@ -100,17 +121,19 @@
    },
    "fox": {
       "background": "#2F294D",
+      "line": "#FFFFFF",
       "colours": [
          "#A8215C",
          "#7B87BA",
          "#22599F",
          "#ED86AF",
-         "#C97637",
+         "#A67C00",
          "#46408F"
       ]
    },
    "owl": {
       "background": "#D9A374",
+      "line": "#FFFFFF",
       "colours": [
          "#25AB86",
          "#633A1F",
@@ -118,6 +141,18 @@
          "#E15400",
          "#0F2E36",
          "#8F5849"
+      ]
+   },
+   "wolf": {
+      "background": "#3F3F3F",
+      "line": "#FFFFFF",
+      "colours": [
+         "#BA8D5D",
+         "#556F88",
+         "#7F3A3F",
+         "#D72E2E",
+         "#2A2325",
+         "#4A3C31"
       ]
    }
 }

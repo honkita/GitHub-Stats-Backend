@@ -35,10 +35,11 @@ function getTopValues(values, limit) {
  * @param {Array} keys
  * @param {Object} values
  * @param {number} total
- * @param {Array} colors
+ * @param {Array} gradient
+ * @param {string} line
  * @returns {Array} SVG elements as strings
  */
-function generateGraph(cx, y, r, name, keys, values, total, colors) {
+function generateGraph(cx, y, r, name, keys, values, total, gradient, line) {
    const graph = [];
    let sumAngle = 0;
 
@@ -56,7 +57,7 @@ function generateGraph(cx, y, r, name, keys, values, total, colors) {
          const circleY = cy + r * 3 + (i * r) / 2;
 
          // Devicon inline SVG
-         const iconSVG = getDeviconSVG(key);
+         const iconSVG = getDeviconSVG(key, line);
          const iconScale = 0.18;
          const otherScale = 1;
 
@@ -65,15 +66,15 @@ function generateGraph(cx, y, r, name, keys, values, total, colors) {
 
          graph.push(`
                 <circle r="${r}" cx="${cx}" cy="${cy}" fill="transparent"
-                    stroke="${colors[i] || "#888"}"
+                    stroke="${gradient[i] || "#888"}"
                     stroke-width="${r * 2}"
                     stroke-dasharray="${strokeLength} ${circumference}"
                     transform="rotate(${sumAngle - 90} ${cx} ${cy})"/>
                 
                 <circle r="${r / 5}" cx="${circleX}" cy="${circleY}"
                     fill="${
-                       colors[i] || "#888"
-                    }" stroke-width="3px" stroke="white"/>
+                       gradient[i] || "#888"
+                    }" stroke-width="3px" stroke="${line}"/>
 
                 <g transform="translate(${circleX + 20}, ${
             circleY + iconYOffset
@@ -179,7 +180,8 @@ async function parseLink(user, x, y, r, colour, limit) {
       0
    );
 
-   const colors = colours[colour in colours ? colour : "default"].colours;
+   const gradient = colours[colour in colours ? colour : "mono_black"].colours;
+   const line = colours[colour in colours ? colour : "mono_black"].line;
 
    // Generate graphs
    const linesGraph = generateGraph(
@@ -190,7 +192,8 @@ async function parseLink(user, x, y, r, colour, limit) {
       keys,
       sortedLan,
       lineTotal,
-      colors
+      gradient,
+      line
    );
    const weightedGraph = generateGraph(
       r * 9,
@@ -200,7 +203,8 @@ async function parseLink(user, x, y, r, colour, limit) {
       weightedKeys,
       sortedWeightedLan,
       reposCodeTotal,
-      colors
+      gradient,
+      line
    );
 
    const scale = 1.5;
@@ -224,7 +228,7 @@ async function parseLink(user, x, y, r, colour, limit) {
       <g transform="translate(${stats_x}, ${
             r * row - (24 * scale) / 2
          }) scale(${scale})" dominant-baseline="middle" text-anchor="middle">
-        ${getStatsIcon(icon)}
+        ${getStatsIcon(icon, line)}
       </g>
       <text x="${x - r}" y="${
             r * row

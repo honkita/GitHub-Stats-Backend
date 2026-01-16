@@ -22,7 +22,6 @@ app.get("/", (req, res) => {
    if (req.query.github != null) {
       if (req.query.colour == null) {
          colour = "mono_dark";
-         cache.put("colour", "mono_dark", 60000);
       } else {
          colour = req.query.colour;
       }
@@ -74,7 +73,7 @@ app.get("/", (req, res) => {
               font-family: "Verdana";
               font-weight: 400;
               font-style: normal; 
-              fill: white;
+              fill: ${colours[colour in colours ? colour : "mono_dark"].line};
             }
           </style>
         </defs>
@@ -82,13 +81,16 @@ app.get("/", (req, res) => {
             <rect width="${box.width}" height="${box.height}" x="0" y="0" rx="${
             box.curve
          }" ry="${box.curve}" 
-              style="fill:${background};stroke-width:${
-            box.border
-         };stroke:white" /> 
+              style="fill:${background};stroke-width:${box.border};stroke:${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }" /> 
           <g transform="translate(${box.border * 2}, ${
             box.border * 2
          }) scale(0.5)" dominant-baseline="middle" text-anchor="left">
-            ${getDeviconSVG("github")}
+            ${getDeviconSVG(
+               "github",
+               colours[colour in colours ? colour : "mono_dark"].line
+            )}
           </g>
           <text x="${box.border * 2 + 96}" y="${
             box.border * 2 + 32
@@ -98,34 +100,40 @@ app.get("/", (req, res) => {
             ${req.query.github}</text>   
           <circle r="${circle.r * 2}" cx="${circle.r * 3}" cy="${
             circle.r * 4
-         }" style="fill:transparent;stroke-width:${box.border};stroke:white"/>
+         }" style="fill:transparent;stroke-width:${box.border};stroke:${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }"/>
           <rect x="${circle.r * 6 - line.width / 2}" y = "${
             circle.r * 2
          }" width="${line.width}" height="${box.height - circle.r * 3}" rx="${
             line.width / 2
-         }" ry="${line.width / 2}" fill="white"/>
+         }" ry="${line.width / 2}" fill="${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }"/>
           <circle r="${circle.r * 2}" cx="${circle.r * 9}" cy="${
             circle.r * 4
-         }" style="fill:transparent;stroke-width:${box.border};stroke:white"/>
+         }" style="fill:transparent;stroke-width:${box.border};stroke:${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }"/>
           <rect x="${circle.r * 12 - line.width / 2}" y = "${
             circle.r * 2
          }" width="${line.width}" height="${box.height - circle.r * 3}" rx="${
             line.width / 2
-         }" ry="${line.width / 2}" fill="white"/>
+         }" ry="${line.width / 2}" fill="${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }"/>
           ${link} 
           <circle r="${circle.r}" cx="${circle.r * 3}" cy="${
             circle.r * 4
-         }" style="fill:${background};stroke-width:${
-            box.border / 2
-         };stroke:white"/>
+         }" style="fill:${background};stroke-width:${box.border / 2};stroke:${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }"/>
           <circle r="${circle.r}" cx="${circle.r * 9}" cy="${
             circle.r * 4
-         }" style="fill:${background};stroke-width:${
-            box.border / 2
-         };stroke:white"/>
+         }" style="fill:${background};stroke-width:${box.border / 2};stroke:${
+            colours[colour in colours ? colour : "mono_dark"].line
+         }"/>
         </g>
-                
-        
       </svg>`
       );
    });

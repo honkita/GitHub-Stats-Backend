@@ -60,15 +60,21 @@ A code snippet example with the limit set as **3** and the colour theme set as *
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_dark"/></center>
     </td>
     <td>
+      <h4>mono_light</h4>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_light"/></center>
+    </td>
+  </tr>
+   <tr>
+    <td>
       <h4>mono_red</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_red"/></center>
     </td>
-  </tr>
-  <tr>
-    <td>
+     <td>
       <h4>mono_blue</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_blue"/></center>
     </td>
+  </tr>
+  <tr>
      <td>
       <h4>mono_green</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=mono_green"/></center>
@@ -118,6 +124,12 @@ A code snippet example with the limit set as **3** and the colour theme set as *
     <td>
        <h4>owl</h4>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=owl"/></center>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <h4>WOLF</h4>
+        <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=wolf"/></center>
     </td>
   </tr>
   <tr>

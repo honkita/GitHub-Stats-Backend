@@ -3,20 +3,21 @@ const path = require("path");
 
 colours = require("../Assets/colours.json");
 
-lineColour = "#FFFFFF";
-
 /**
  * Returns the Stats Icon SVG for a given name
  * @param {string} name
  * @returns
  */
-function getStatsIcon(name) {
+function getStatsIcon(name, lineColour = "#FFFFFF") {
    let filePath = path.join(
       __dirname,
       "../node_modules/@primer/octicons/build/svg",
       `${name}-24.svg`
    );
-   return svgModifier(filePath).replace(/\s*\/>/g, ` fill="${lineColour}"/>`);
+   return svgModifier(filePath, lineColour).replace(
+      /\s*\/>/g,
+      ` fill="${lineColour}"/>`
+   );
 }
 
 /**
@@ -41,7 +42,7 @@ function normalizeTechName(key) {
  * @param {string} filePath
  * @returns
  */
-function svgModifier(filePath) {
+function svgModifier(filePath, lineColour = "#FFFFFF") {
    try {
       let svg = fs.readFileSync(filePath, "utf-8");
       svg = svg
@@ -63,7 +64,7 @@ function svgModifier(filePath) {
  * @param {string} tech
  * @returns
  */
-function getDeviconSVG(tech) {
+function getDeviconSVG(tech, lineColour = "#FFFFFF") {
    const techName = normalizeTechName(tech);
    let filePath = path.join(
       __dirname,
@@ -73,7 +74,7 @@ function getDeviconSVG(tech) {
    );
 
    if (techName === "other") {
-      return getStatsIcon("code");
+      return getStatsIcon("code", lineColour);
    } else if (!fs.existsSync(filePath)) {
       filePath = path.join(
          __dirname,
@@ -81,12 +82,12 @@ function getDeviconSVG(tech) {
          techName,
          `${techName}-original.svg`
       );
-      return svgModifier(filePath).replace(
+      return svgModifier(filePath, lineColour).replace(
          /\s*\/>/g,
          ` fill="${lineColour}" stroke="${lineColour}" />`
       );
    }
-   return svgModifier(filePath);
+   return svgModifier(filePath, lineColour);
 }
 
 module.exports = {
