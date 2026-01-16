@@ -96,9 +96,13 @@ A code snippet example with the limit set as **3** and the colour theme set as *
     </td>
   </tr>
   <tr>
-  <td>
+    <td>
       <h4>aqua</h4>
       <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=aqua"/></center>
+    </td>
+    <td>
+      <h4>pride</h4>
+      <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=pride"/></center>
     </td>
   </tr>
 </table>

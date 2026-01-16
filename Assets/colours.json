@@ -95,6 +95,18 @@
          "#014651"
       ]
    },
+   "pride": {
+      "background": "#CBABD1",
+      "line": "#6F1926",
+      "colours": [
+         "#DA324C",
+         "#F28754",
+         "#F8E16F",
+         "#95CF92",
+         "#369ACC",
+         "#9656A2"
+      ]
+   },
    "olive": {
       "background": "#BCCE5E",
       "line": "#FFFFFF",
