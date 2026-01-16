@@ -128,11 +128,10 @@ A code snippet example with the limit set as **3** and the colour theme set as *
   </tr>
   <tr>
     <td>
-       <h4>WOLF</h4>
+       <h4>wolf</h4>
         <center><img title="GitHub Stats" src="https://git-hub-stats-backend.vercel.app?github=honkita&colour=wolf"/></center>
     </td>
   </tr>
-  <tr>
 </table>
 
 ## Forking and Deploying on Your Own
