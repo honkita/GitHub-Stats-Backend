@@ -2,7 +2,7 @@
 
 # GitHub Stats (Elite's version)
 
-![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg)
+![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg) ![](https://raw.githubusercontent.com/honkita/PixelIcons/main/Languages/JavaScript.svg) ![](https://raw.githubusercontent.com/honkita/PixelIcons/main/Frameworks/Express.svg)
 
 ---
 
