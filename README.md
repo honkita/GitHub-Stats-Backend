@@ -4,6 +4,8 @@
 
 ![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg)
 
+---
+
 > [!IMPORTANT]
 > Because of GitHub's rate limit, it is advised to fork this project and deploy on Vercel or a similar platform. Along with this, generating a personal access token is mandatory because without one, the max number of requests per hour is 50 and private repositories CAN NOT be accessed. While there is caching for users that refreshes every 1–5 minutes, it is still recommended.
 
